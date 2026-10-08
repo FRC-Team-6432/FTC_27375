@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp
-public class SampleOpMode extends LinearOpMode {
+public class IndividualMotorTest extends LinearOpMode {
     //TODO: define motors, sensors, processors here
     private DcMotor frontLeft;
     private DcMotor frontRight;
@@ -21,15 +21,33 @@ public class SampleOpMode extends LinearOpMode {
         backLeft = hardwareMap.get(DcMotor.class,"backLeft");
         backRight = hardwareMap.get(DcMotor.class,"backRight");
 
-
-
-
         waitForStart();
         resetRuntime();
 
         if (opModeIsActive()) {
             while(opModeIsActive()) {
                 //TODO: add loop code here
+                if (gamepad1.x) {
+                    frontLeft.setPower(1);
+                } else {
+                    frontLeft.setPower(0);
+                }
+                if (gamepad1.y) {
+                    frontRight.setPower(1);
+                } else {
+                    frontRight.setPower(0);
+                }
+                if (gamepad1.a) {
+                    backLeft.setPower(1);
+                } else {
+                    backLeft.setPower(0);
+                }
+                if (gamepad1.b) {
+                    backRight.setPower(1);
+                } else {
+                    backRight.setPower(0);
+                }
+
                 telemetry.addData("Runtime: ", getRuntime());
                 telemetry.update();
             }
