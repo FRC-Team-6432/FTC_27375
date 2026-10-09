@@ -1,7 +1,9 @@
 ## Team 27375 Code!
 
 ### Motor Config
-frontLeft: Port 2
-frontRight: Port 0
-backLeft: Port 3 
-BackRight: Port 1
+| Motor      | Port   |
+|------------|--------|
+| frontLeft  | 2      |
+| frontRight | 0      |
+| backLeft   | 3      |
+| BackRight  | 1      |
