@@ -8,21 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp
 public class SampleOpMode extends LinearOpMode {
     //TODO: define motors, sensors, processors here
-    private DcMotor frontLeft;
-    private DcMotor frontRight;
-    private DcMotor backLeft;
-    private DcMotor backRight;
 
     @Override
     public void runOpMode() throws InterruptedException {
         // TODO: add initialise code here
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class,"backLeft");
-        backRight = hardwareMap.get(DcMotor.class,"backRight");
-
-
-
 
         waitForStart();
         resetRuntime();
@@ -34,13 +23,5 @@ public class SampleOpMode extends LinearOpMode {
                 telemetry.update();
             }
         }
-    }
-
-    private void drive(double forward) {
-        // drive code
-        frontLeft.setPower(forward);
-        frontRight.setPower(forward);
-        backLeft.setPower(forward);
-        backRight.setPower(forward);
     }
 }
