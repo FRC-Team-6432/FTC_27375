@@ -13,9 +13,14 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagClusterDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.vision.apriltag.AprilTagGameDatabase;
 import org.firstinspires.ftc.vision.apriltag.AprilTagLibrary;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 @TeleOp
 public class FollowAprilTag extends LinearOpMode {
@@ -26,8 +31,7 @@ public class FollowAprilTag extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TODO: add initialise code here
-
-
+        initVision();
 
         waitForStart();
         resetRuntime();
@@ -36,7 +40,10 @@ public class FollowAprilTag extends LinearOpMode {
             while(opModeIsActive()) {
                 //TODO: add loop code here
                 telemetry.addData("Runtime: ", getRuntime());
+                aprilTagTelemetry();
+
                 telemetry.update();
+
             }
             this.visionPortal.close();
         }
@@ -50,7 +57,7 @@ public class FollowAprilTag extends LinearOpMode {
                 .setOutputUnits(DistanceUnit.MM, AngleUnit.DEGREES)
                 .setCameraPose(
                         new Position(DistanceUnit.MM, 0, 0, 0, System.nanoTime()),
-                        new YawPitchRollAngles(AngleUnit.DEGREES, 0, -45, 0, System.nanoTime())
+                        new YawPitchRollAngles(AngleUnit.DEGREES, 90, 0, 0, System.nanoTime())
                 )
                 .setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
                 .setTagLibrary(aprilTagLibrary)
@@ -63,5 +70,21 @@ public class FollowAprilTag extends LinearOpMode {
                 .enableLiveView(true)
                 .addProcessor(this.aprilTagProcessor)
                 .build();
+    }
+
+    private void aprilTagTelemetry() {
+        ArrayList<AprilTagDetection> aprilTagDetections = this.aprilTagProcessor.getDetections();
+
+        for(AprilTagDetection detection : aprilTagDetections) {
+            if (detection instanceof AprilTagClusterDetection){
+                AprilTagClusterDetection clusterDetection = (AprilTagClusterDetection) detection;
+                telemetry.addData("aprilTagName: ", clusterDetection.metadata.name);
+                telemetry.addData("aprilTagShortName: ", clusterDetection.metadata.shortName);
+                telemetry.addData("aprilTagDistanceUnit: ", clusterDetection.metadata.distanceUnit);
+                telemetry.addData("aprilTagFieldPosition: ", clusterDetection.metadata.fieldPosition);
+                telemetry.addData("aprilTagFieldOrientation: ", clusterDetection.metadata.fieldOrientation);
+
+            }
+        }
     }
 }

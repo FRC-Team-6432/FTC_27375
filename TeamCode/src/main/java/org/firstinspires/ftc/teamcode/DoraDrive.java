@@ -5,6 +5,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import java.util.ArrayList;
+
+
+enum IntakeState {
+    STOP,
+    INTAKE,
+    OUTTAKE
+}
 @TeleOp
 public class DoraDrive extends LinearOpMode {
     //TODO: define motors, sensors, processors here
@@ -13,9 +21,14 @@ public class DoraDrive extends LinearOpMode {
     private DcMotor backLeft;
     private DcMotor backRight;
 
+    private ArrayList<IntakeState> intakeStateList = new ArrayList<>();
+
     @Override
     public void runOpMode() throws InterruptedException {
-        // TODO: add initialise code here
+        // TODO: add initialise code herea
+
+        intakeStateList.add(IntakeState.STOP);
+
 //        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
 //        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
 //        backLeft = hardwareMap.get(DcMotor.class,"backLeft");
@@ -38,7 +51,7 @@ public class DoraDrive extends LinearOpMode {
             while(opModeIsActive()) {
                 //TODO: add loop code here
                 drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
-                handleIntake(gamepad1.left_bumper);
+                handleIntake(gamepad1.left_bumper, gamepad1.left_trigger_pressed);
                 handleShooter(gamepad1.right_bumper);
                 telemetry.addData("Runtime: ", getRuntime());
                 telemetry.update();
@@ -56,24 +69,41 @@ public class DoraDrive extends LinearOpMode {
         telemetry.addData("rotate: ", rotate);
         telemetry.addData("strafe: ", strafe);
     }
+
+    private IntakeState getIntakeState() {
+        // return last element of the list
+        return intakeStateList.get(intakeStateList.size()-1);
+    }
     
-    private void handleIntake(boolean shouldIntake) {
+    private void handleIntake(boolean shouldIntake, boolean shouldOutake) {
         if (shouldIntake) {
-            // Set Motor to 1
-            telemetry.addLine("INTAKE PLEASE");
+            intakeStateList.add(IntakeState.INTAKE);
         } else {
-            // Stop
-            telemetry.addLine("STOP INTAKE");
+            intakeStateList.remove(IntakeState.INTAKE);
+        }
+        if (shouldOutake) {
+            intakeStateList.add(IntakeState.OUTTAKE);
+        } else {
+            intakeStateList.remove(IntakeState.OUTTAKE);
+        }
+
+        switch (getIntakeState()) {
+            case INTAKE:
+                telemetry.addLine("INTAKING");
+            case OUTTAKE:
+                telemetry.addLine("OUTTAKE");
+            case STOP:
+                telemetry.addLine("STOP");
         }
     }
 
     private void handleShooter(boolean shouldShoot) {
         if (shouldShoot) {
             // Set Motor to 1
-            telemetry.addLine("SHOOT PLEASE");
+            telemetry.addLine("SHOOTING");
         } else {
             // Stop
-            telemetry.addLine("PLEASE STOP SHOOTING");
+            telemetry.addLine("NOT SHOOTING");
         }
     }
 }
