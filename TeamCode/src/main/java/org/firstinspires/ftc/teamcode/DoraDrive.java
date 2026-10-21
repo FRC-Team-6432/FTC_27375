@@ -7,7 +7,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import java.util.ArrayList;
 
+enum ShooterState {
 
+    STOP,
+    SHOOT,
+    REVERSESHOOT,
+}
 enum IntakeState {
     STOP,
     INTAKE,
@@ -23,11 +28,23 @@ public class DoraDrive extends LinearOpMode {
 
     private ArrayList<IntakeState> intakeStateList = new ArrayList<>();
 
+    private ArrayList<ShooterState> shooterStateList = new ArrayList<>();
+
     @Override
     public void runOpMode() throws InterruptedException {
-        // TODO: add initialise code herea
+        // TODO: add initialise code here
 
         intakeStateList.add(IntakeState.STOP);
+
+        intakeStateList.add(IntakeState.INTAKE);
+
+        intakeStateList.add(IntakeState.OUTTAKE);
+
+        shooterStateList.add(ShooterState.STOP);
+
+        shooterStateList.add(ShooterState.SHOOT);
+
+        shooterStateList.add(ShooterState.REVERSESHOOT);
 
 //        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
 //        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
@@ -91,19 +108,18 @@ public class DoraDrive extends LinearOpMode {
             case INTAKE:
                 telemetry.addLine("INTAKING");
             case OUTTAKE:
-                telemetry.addLine("OUTTAKE");
+                telemetry.addLine("OUTTAKING");
             case STOP:
                 telemetry.addLine("STOP");
         }
     }
 
-    private void handleShooter(boolean shouldShoot) {
+    private void handleShooter(boolean shouldShoot, boolean shootReverseShoot) {
         if (shouldShoot) {
-            // Set Motor to 1
             telemetry.addLine("SHOOTING");
         } else {
-            // Stop
             telemetry.addLine("NOT SHOOTING");
         }
+
     }
 }
