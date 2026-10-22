@@ -69,7 +69,7 @@ public class DoraDrive extends LinearOpMode {
                 //TODO: add loop code here
                 drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 handleIntake(gamepad1.left_bumper, gamepad1.left_trigger_pressed);
-                handleShooter(gamepad1.right_bumper);
+//                handleShooter(gamepad1.right_bumper);
                 telemetry.addData("Runtime: ", getRuntime());
                 telemetry.update();
             }
