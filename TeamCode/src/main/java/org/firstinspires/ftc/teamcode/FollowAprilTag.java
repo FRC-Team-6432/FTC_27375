@@ -104,29 +104,21 @@ public class FollowAprilTag extends LinearOpMode {
         }
     }
 
-    private void aprilTagTelemetry(AprilTagClusterDetection clusterDetection) {
-//        ArrayList<AprilTagDetection> aprilTagDetections = this.aprilTagProcessor.getDetections();
+    private void aprilTagTelemetry(AprilTagClusterDetection detection) {
+        telemetry.addData("x: ", detection.robotPose.getPosition().x);
+        telemetry.addData("y:", detection.robotPose.getPosition().y);
+        telemetry.addData("z: ", detection.robotPose.getPosition().z);
+        telemetry.addLine();
+        telemetry.addData("range: ", detection. ftcPose.range);
+        telemetry.addData("bearing: ", detection.ftcPose.bearing);
+        telemetry.addData("elavation: ", detection.ftcPose.elevation);
 
-        for(AprilTagDetection detection : aprilTagDetections) {
-            if (detection instanceof AprilTagClusterDetection){
-                telemetry.addData("x: ", detection.robotPose.getPosition().x);
-                telemetry.addData("y:", detection.robotPose.getPosition().y);
-                telemetry.addData("z: ", detection.robotPose.getPosition().z);
-                telemetry.addLine();
-                telemetry.addData("range: ", detection. ftcPose.range);
-                telemetry.addData("bearing: ", detection.ftcPose.bearing);
-                telemetry.addData("elavation: ", detection.ftcPose.elevation);
-
-                AprilTagClusterDetection clusterDetection = (AprilTagClusterDetection) detection;
-                telemetry.addData("aprilTagName: ", clusterDetection.metadata.name);
-                telemetry.addData("aprilTagShortName: ", clusterDetection.metadata.shortName);
-                telemetry.addData("aprilTagDistanceUnit: ", clusterDetection.metadata.distanceUnit);
-//                telemetry.addData("aprilTagFieldPosition: ", clusterDetection.metadata.fieldPosition);
-//                telemetry.addData("aprilTagFieldOrientation: ", clusterDetection.metadata.fieldOrientation);
-                telemetry.addData("Ftc Pose: ", clusterDetection.ftcPose);
-
-//            }
-//        }
+        telemetry.addData("aprilTagName: ", detection.metadata.name);
+        telemetry.addData("aprilTagShortName: ", detection.metadata.shortName);
+        telemetry.addData("aprilTagDistanceUnit: ", detection.metadata.distanceUnit);
+//        telemetry.addData("aprilTagFieldPosition: ", detection.metadata.fieldPosition);
+//        telemetry.addData("aprilTagFieldOrientation: ", detection.metadata.fieldOrientation);
+        telemetry.addData("Ftc Pose: ", detection.ftcPose);
     }
 
     private void handleAprilTagDetections() {

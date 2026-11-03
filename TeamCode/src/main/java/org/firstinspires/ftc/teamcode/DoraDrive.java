@@ -6,12 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import java.util.ArrayList;
 
-enum ShooterState {
-
-    STOPPED,
-    SHOOTING,
-    REVERSESHOOTING,
-}
 enum IntakeState {
     STOPPED,
     INTAKING,
@@ -27,14 +21,15 @@ public class DoraDrive extends LinearOpMode {
 
     private final ArrayList<IntakeState> intakeStateList = new ArrayList<>();
 
-    private final ArrayList<ShooterState> shooterStateList = new ArrayList<>();
+    private ShooterSubsystem shooter;
+
 
     @Override
     public void runOpMode() throws InterruptedException {
         // TODO: add initialise code here
+        this.shooter = new ShooterSubsystem(null, telemetry);
 
         intakeStateList.add(IntakeState.STOPPED);
-        shooterStateList.add(ShooterState.STOPPED);
 
 //        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
 //        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
@@ -58,9 +53,10 @@ public class DoraDrive extends LinearOpMode {
             while(opModeIsActive()) {
                 //TODO: add loop code here
                 drive(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
+                this.shooter.handle(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
                 handleIntake(gamepad1.left_bumper, gamepad1.left_trigger_pressed);
-                handleShooter(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
                 telemetry.addData("Runtime: ", getRuntime());
+                this.shooter.telemetry();
                 telemetry.update();
             }
         }
@@ -84,9 +80,7 @@ public class DoraDrive extends LinearOpMode {
         return intakeStateList.get(intakeStateList.size()-1);
     }
 
-    private ShooterState getShooterState() {
-        return shooterStateList.get(shooterStateList.size()-1);
-    }
+
     
     private void handleIntake(boolean shouldIntake, boolean shouldOutake) {
         if (shouldIntake && !intakeStateList.contains(IntakeState.INTAKING)) {
@@ -107,33 +101,6 @@ public class DoraDrive extends LinearOpMode {
 
                 break;
             case OUTTAKING:
-
-                break;
-            case STOPPED:
-
-                break;
-        }
-    }
-
-    private void handleShooter(boolean shouldShoot, boolean shouldReverseShoot) {
-        if (shouldShoot && !shooterStateList.contains(ShooterState.SHOOTING)) {
-            shooterStateList.add(ShooterState.SHOOTING);
-        } else  if (!shouldShoot){
-            shooterStateList.remove(ShooterState.SHOOTING);
-        }
-        if (shouldReverseShoot && !shooterStateList.contains(ShooterState.REVERSESHOOTING)) {
-            shooterStateList.add(ShooterState.REVERSESHOOTING);
-        } else if (!shouldReverseShoot){
-            shooterStateList.remove(ShooterState.REVERSESHOOTING);
-        }
-
-        telemetry.addData("Shooter State: ", getShooterState());
-
-        switch (getShooterState()) {
-            case SHOOTING:
-
-                break;
-            case REVERSESHOOTING:
 
                 break;
             case STOPPED:
