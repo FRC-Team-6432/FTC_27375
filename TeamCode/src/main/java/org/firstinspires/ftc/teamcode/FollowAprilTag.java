@@ -57,7 +57,7 @@ public class FollowAprilTag extends LinearOpMode {
                 .setOutputUnits(DistanceUnit.MM, AngleUnit.DEGREES)
                 .setCameraPose(
                         new Position(DistanceUnit.MM, 0, 0, 0, System.nanoTime()),
-                        new YawPitchRollAngles(AngleUnit.DEGREES, 90, 0, 0, System.nanoTime())
+                        new YawPitchRollAngles(AngleUnit.DEGREES, 0, 0, 0, System.nanoTime())
                 )
                 .setTagFamily(AprilTagProcessor.TagFamily.TAG_36h11)
                 .setTagLibrary(aprilTagLibrary)
@@ -77,6 +77,14 @@ public class FollowAprilTag extends LinearOpMode {
 
         for(AprilTagDetection detection : aprilTagDetections) {
             if (detection instanceof AprilTagClusterDetection){
+                telemetry.addData("x: ", detection.robotPose.getPosition().x);
+                telemetry.addData("y:", detection.robotPose.getPosition().y);
+                telemetry.addData("z: ", detection.robotPose.getPosition().z);
+                telemetry.addLine();
+                telemetry.addData("range: ", detection. ftcPose.range);
+                telemetry.addData("bearing: ", detection.ftcPose.bearing);
+                telemetry.addData("elavation: ", detection.ftcPose.elevation);
+
                 AprilTagClusterDetection clusterDetection = (AprilTagClusterDetection) detection;
                 telemetry.addData("aprilTagName: ", clusterDetection.metadata.name);
                 telemetry.addData("aprilTagShortName: ", clusterDetection.metadata.shortName);
