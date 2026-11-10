@@ -17,6 +17,8 @@ import java.util.ArrayList;
         private final Telemetry telemetry;
         private final double INTAKE_SPEED = 1;
 
+        private final DcMotor intakeMotor;
+
 
         private final ArrayList<org.firstinspires.ftc.teamcode.IntakeState> intakeStateList;
 
@@ -24,8 +26,10 @@ import java.util.ArrayList;
             intakeStateList = new ArrayList<>();
             intakeStateList.add(org.firstinspires.ftc.teamcode.IntakeState.STOPPED);
 
+            this.intakeMotor = intakeMotor;
             if (intakeMotor != null) {
-                intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                this.intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+                this.intakeMotor.setPower(0);
             }
 
             this.telemetry = telemetry;
@@ -46,13 +50,13 @@ import java.util.ArrayList;
 
             switch (getintakeState()) {
                 case INTAKING:
-//                intakeMotor.setPower(INTAKE_SPEED);
+                    intakeMotor.setPower(INTAKE_SPEED);
                     break;
                 case OUTTAKING:
-//                intakeMotor.setPower(-INTAKE_SPEED);
+                    intakeMotor.setPower(-INTAKE_SPEED);
                     break;
                 case STOPPED:
-//                intakeMotor.setPower(0);
+                    intakeMotor.setPower(0);
                     break;
             }
         }

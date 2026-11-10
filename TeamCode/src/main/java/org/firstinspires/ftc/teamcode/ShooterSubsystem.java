@@ -31,6 +31,7 @@ public class ShooterSubsystem {
         this.shooterMotor = shooterMotor;
         if (shooterMotor != null) {
             this.shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            this.shooterMotor.setPower(0);
         }
 
 //        this.servo = servo;
@@ -59,11 +60,11 @@ public class ShooterSubsystem {
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
-//                shooterMotor.setPower(-SHOOTER_SPEED);
+                shooterMotor.setPower(-SHOOTER_MAX_SPEED);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case STOPPED:
-//                shooterMotor.setPower(0);
+                shooterMotor.setPower(0);
 //                servo.setPosition(SERV0_CLOSED);
                 break;
         }

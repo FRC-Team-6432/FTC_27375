@@ -37,6 +37,11 @@ public class DriveSubsystem {
             frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+            this.backLeft.setPower(0);
+            this.backRight.setPower(0);
+            this.frontRight.setPower(0);
+            this.frontLeft.setPower(0);
         }
 
 
