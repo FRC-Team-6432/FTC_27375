@@ -10,7 +10,7 @@ enum ShooterState {
 
     STOPPED,
     SHOOTING,
-    REVERSESHOOTING,
+    REVERSESHOOTING, INTAKING, OUTTAKING,
 }
 
 public class ShooterSubsystem {
