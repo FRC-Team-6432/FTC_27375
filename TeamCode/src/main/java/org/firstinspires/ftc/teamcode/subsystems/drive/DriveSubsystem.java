@@ -1,7 +1,5 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems.drive;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -29,7 +27,7 @@ public class DriveSubsystem {
         this.backLeft = backLeft;
         this.backRight = backRight;
 
-        if (frontLeft == null || frontRight == null || backLeft == null || backRight == null) {
+        if (frontLeft != null && frontRight != null && backLeft != null && backRight != null) {
             frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
             backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -37,8 +35,12 @@ public class DriveSubsystem {
             frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        }
 
+            this.backLeft.setPower(0);
+            this.backRight.setPower(0);
+            this.frontRight.setPower(0);
+            this.frontLeft.setPower(0);
+        }
 
         this.telemetry = telemetry;
     }

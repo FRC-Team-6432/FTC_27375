@@ -2,6 +2,13 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
+import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterDirection;
+import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem;
 
 
 @TeleOp
@@ -10,9 +17,25 @@ public class TeleOp_Main extends LinearOpMode {
     @Override
     public void runOpMode() {
         // TODO: add initialise code here
-        ShooterSubsystem shooter = new ShooterSubsystem(null, telemetry);
-        IntakeSubsystem intake = new IntakeSubsystem(null, telemetry);
-        DriveSubsystem drive = new DriveSubsystem(null, null, null, null, telemetry);
+        ShooterSubsystem pollenShooter = new ShooterSubsystem(hardwareMap.tryGet(DcMotor.class,
+                Constants.Drive.POLLENSHOOTER_MOTOR), telemetry, DcMotorSimple.Direction.REVERSE);
+
+        ShooterSubsystem nectarShooter = new ShooterSubsystem(hardwareMap.tryGet(DcMotor.class,
+                Constants.Drive.NECTARSHOOTER_MOTOR), telemetry);
+
+        IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.tryGet(DcMotor.class,
+                Constants.Drive.INTAKE_MOTOR), telemetry);
+
+        DriveSubsystem drive = new DriveSubsystem(
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.FRONT_LEFT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.FRONT_RIGHT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.BACK_LEFT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.BACK_RIGHT_MOTOR),
+                telemetry
+        );
+
+        telemetry.addLine("Initialised!");
+        telemetry.update();
 
         waitForStart();
         resetRuntime();
@@ -22,11 +45,13 @@ public class TeleOp_Main extends LinearOpMode {
                 //TODO: add loop code here
                 drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 drive.drive();
+                pollenShooter.handle(gamepad1.right_trigger_pressed, false, gamepad1.right_trigger);
+                nectarShooter.handle(gamepad1.left_trigger_pressed, false, gamepad1.left_trigger);
+                intake.handle(gamepad1.right_bumper, gamepad1.left_bumper);
 
-                shooter.handle(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
-                intake.handle(gamepad1.left_bumper, gamepad1.left_trigger_pressed);
                 telemetry.addData("Runtime: ", getRuntime());
-                shooter.telemetry();
+                pollenShooter.telemetry();
+                nectarShooter.telemetry();
                 intake.telemetry();
                 telemetry.update();
             }
