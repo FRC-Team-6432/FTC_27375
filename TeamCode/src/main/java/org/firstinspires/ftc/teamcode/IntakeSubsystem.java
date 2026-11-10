@@ -50,13 +50,13 @@ import java.util.ArrayList;
 
             switch (getintakeState()) {
                 case INTAKING:
-                    intakeMotor.setPower(INTAKE_SPEED);
+//                    intakeMotor.setPower(INTAKE_SPEED);
                     break;
                 case OUTTAKING:
-                    intakeMotor.setPower(-INTAKE_SPEED);
+//                    intakeMotor.setPower(-INTAKE_SPEED);
                     break;
                 case STOPPED:
-                    intakeMotor.setPower(0);
+//                    intakeMotor.setPower(0);
                     break;
             }
         }
