@@ -18,10 +18,10 @@ public class TeleOp_Main extends LinearOpMode {
     public void runOpMode() {
         // TODO: add initialise code here
         ShooterSubsystem pollenShooter = new ShooterSubsystem(hardwareMap.tryGet(DcMotor.class,
-                Constants.Drive.POLLENSHOOTER_MOTOR), telemetry, DcMotorSimple.Direction.REVERSE);
+                Constants.Drive.POLLENSHOOTER_MOTOR), telemetry, DcMotorSimple.Direction.REVERSE, 1);
 
         ShooterSubsystem nectarShooter = new ShooterSubsystem(hardwareMap.tryGet(DcMotor.class,
-                Constants.Drive.NECTARSHOOTER_MOTOR), telemetry);
+                Constants.Drive.NECTARSHOOTER_MOTOR), telemetry, 1);
 
         IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.tryGet(DcMotor.class,
                 Constants.Drive.INTAKE_MOTOR), telemetry);

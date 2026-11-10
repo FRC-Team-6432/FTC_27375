@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ShooterSubsystem {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
-    private final double SHOOTER_MAX_SPEED = 0.5;
+    private final double maxPower;
 //    private final double SERVO_OPEN = 1;
 //    private final double SERV0_CLOSED = 0;
 //    private final Servo servo;
@@ -18,9 +18,11 @@ public class ShooterSubsystem {
 
     private final ArrayList<ShooterState> shooterStateList;
 
-    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, DcMotorSimple.Direction direction){
+    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, DcMotorSimple.Direction direction, double maxPower){
         shooterStateList = new ArrayList<>();
         shooterStateList.add(ShooterState.STOPPED);
+
+        this.maxPower = maxPower;
 
         this.shooterMotor = shooterMotor;
         if (shooterMotor != null) {
@@ -37,8 +39,8 @@ public class ShooterSubsystem {
         this.telemetry = telemetry;
     }
 
-    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry){
-        this(shooterMotor, telemetry, DcMotorSimple.Direction.FORWARD);
+    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, double maxPower){
+        this(shooterMotor, telemetry, DcMotorSimple.Direction.FORWARD, maxPower);
     }
 
     public void handle(boolean shouldShoot, boolean shouldReverseShoot, double power) {
@@ -55,11 +57,11 @@ public class ShooterSubsystem {
 
         switch (getState()) {
             case SHOOTING:
-                shooterMotor.setPower(SHOOTER_MAX_SPEED * power);
+                shooterMotor.setPower(maxPower * power);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
-                shooterMotor.setPower(-SHOOTER_MAX_SPEED * power);
+                shooterMotor.setPower(-maxPower * power);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case STOPPED:
