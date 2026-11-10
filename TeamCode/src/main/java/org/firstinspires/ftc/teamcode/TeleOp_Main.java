@@ -24,7 +24,8 @@ public class TeleOp_Main extends LinearOpMode {
                 hardwareMap.get(DcMotor.class, Constants.Drive.BACK_RIGHT_MOTOR),
                 telemetry
         );
-
+        telemetry.addLine("Initialised!");
+        telemetry.update();
         waitForStart();
         resetRuntime();
 
@@ -33,8 +34,8 @@ public class TeleOp_Main extends LinearOpMode {
                 //TODO: add loop code here
                 drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 drive.drive();
-                pollenShooter.handle(gamepad1.right_trigger_pressed, false);
-                nectarShooter.handle(gamepad1.left_trigger_pressed, false);
+                pollenShooter.handle(gamepad1.right_trigger_pressed, false, gamepad1.right_trigger);
+                nectarShooter.handle(gamepad1.left_trigger_pressed, false, gamepad1.left_trigger);
                 intake.handle(gamepad1.right_bumper, gamepad1.left_bumper);
 
                 telemetry.addData("Runtime: ", getRuntime());

@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -17,7 +16,7 @@ enum ShooterState {
 public class ShooterSubsystem {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
-    private final double SHOOTER_SPEED = 1;
+    private final double SHOOTER_MAX_SPEED = 0.25;
 //    private final double SERVO_OPEN = 1;
 //    private final double SERV0_CLOSED = 0;
 //    private final Servo servo;
@@ -42,7 +41,7 @@ public class ShooterSubsystem {
         this.telemetry = telemetry;
     }
 
-    public void handle(boolean shouldShoot, boolean shouldReverseShoot) {
+    public void handle(boolean shouldShoot, boolean shouldReverseShoot, double power) {
         if (shouldShoot && !shooterStateList.contains(ShooterState.SHOOTING)) {
             shooterStateList.add(ShooterState.SHOOTING);
         } else  if (!shouldShoot){
@@ -56,7 +55,7 @@ public class ShooterSubsystem {
 
         switch (getState()) {
             case SHOOTING:
-                shooterMotor.setPower(SHOOTER_SPEED);
+                shooterMotor.setPower(SHOOTER_MAX_SPEED * power);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
