@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @TeleOp
@@ -10,9 +11,19 @@ public class TeleOp_Main extends LinearOpMode {
     @Override
     public void runOpMode() {
         // TODO: add initialise code here
-        ShooterSubsystem shooter = new ShooterSubsystem(null, telemetry);
-        IntakeSubsystem intake = new IntakeSubsystem(null, telemetry);
-        DriveSubsystem drive = new DriveSubsystem(null, null, null, null, telemetry);
+        ShooterSubsystem pollenShooter = new ShooterSubsystem(hardwareMap.get(DcMotor.class,
+                Constants.Drive.POLLENSHOOTER_MOTOR), telemetry);
+        ShooterSubsystem nectarShooter = new ShooterSubsystem(hardwareMap.get(DcMotor.class,
+                Constants.Drive.NECTARSHOOTER_MOTOR), telemetry);
+        IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.get(DcMotor.class,
+                Constants.Drive. INTAKE_MOTOR), telemetry);
+        DriveSubsystem drive = new DriveSubsystem(
+                hardwareMap.get(DcMotor.class, Constants.Drive.FRONT_LEFT_MOTOR),
+                hardwareMap.get(DcMotor.class, Constants.Drive.FRONT_RIGHT_MOTOR),
+                hardwareMap.get(DcMotor.class, Constants.Drive.BACK_LEFT_MOTOR),
+                hardwareMap.get(DcMotor.class, Constants.Drive.BACK_RIGHT_MOTOR),
+                telemetry
+        );
 
         waitForStart();
         resetRuntime();
@@ -22,11 +33,13 @@ public class TeleOp_Main extends LinearOpMode {
                 //TODO: add loop code here
                 drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 drive.drive();
+                pollenShooter.handle(gamepad1.right_trigger_pressed, false);
+                nectarShooter.handle(gamepad1.left_trigger_pressed, false);
+                intake.handle(gamepad1.right_bumper, gamepad1.left_bumper);
 
-                shooter.handle(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
-                intake.handle(gamepad1.left_bumper, gamepad1.left_trigger_pressed);
                 telemetry.addData("Runtime: ", getRuntime());
-                shooter.telemetry();
+                pollenShooter.telemetry();
+                nectarShooter.telemetry();
                 intake.telemetry();
                 telemetry.update();
             }
