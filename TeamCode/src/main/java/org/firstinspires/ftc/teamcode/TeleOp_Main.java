@@ -11,17 +11,17 @@ public class TeleOp_Main extends LinearOpMode {
     @Override
     public void runOpMode() {
         // TODO: add initialise code here
-        ShooterSubsystem pollenShooter = new ShooterSubsystem(hardwareMap.get(DcMotor.class,
+        ShooterSubsystem pollenShooter = new ShooterSubsystem(hardwareMap.tryGet(DcMotor.class,
                 Constants.Drive.POLLENSHOOTER_MOTOR), telemetry);
-        ShooterSubsystem nectarShooter = new ShooterSubsystem(hardwareMap.get(DcMotor.class,
+        ShooterSubsystem nectarShooter = new ShooterSubsystem(hardwareMap.tryGet(DcMotor.class,
                 Constants.Drive.NECTARSHOOTER_MOTOR), telemetry);
-        IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.get(DcMotor.class,
+        IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.tryGet(DcMotor.class,
                 Constants.Drive. INTAKE_MOTOR), telemetry);
         DriveSubsystem drive = new DriveSubsystem(
-                hardwareMap.get(DcMotor.class, Constants.Drive.FRONT_LEFT_MOTOR),
-                hardwareMap.get(DcMotor.class, Constants.Drive.FRONT_RIGHT_MOTOR),
-                hardwareMap.get(DcMotor.class, Constants.Drive.BACK_LEFT_MOTOR),
-                hardwareMap.get(DcMotor.class, Constants.Drive.BACK_RIGHT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.FRONT_LEFT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.FRONT_RIGHT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.BACK_LEFT_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants.Drive.BACK_RIGHT_MOTOR),
                 telemetry
         );
         telemetry.addLine("Initialised!");

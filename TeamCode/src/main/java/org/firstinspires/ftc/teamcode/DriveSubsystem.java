@@ -29,7 +29,7 @@ public class DriveSubsystem {
         this.backLeft = backLeft;
         this.backRight = backRight;
 
-        if (frontLeft == null || frontRight == null || backLeft == null || backRight == null) {
+        if (frontLeft != null && frontRight != null && backLeft != null && backRight != null) {
             frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
             backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
