@@ -34,8 +34,8 @@ public class TeleOp_Main extends LinearOpMode {
                 //TODO: add loop code here
                 drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 drive.drive();
-                pollenShooter.handle(gamepad1.right_trigger_pressed, false, gamepad1.right_trigger);
-                nectarShooter.handle(gamepad1.left_trigger_pressed, false, gamepad1.left_trigger);
+                pollenShooter.handle(gamepad1.right_trigger_pressed, false);
+                nectarShooter.handle(gamepad1.left_trigger_pressed, false);
                 intake.handle(gamepad1.right_bumper, gamepad1.left_bumper);
 
                 telemetry.addData("Runtime: ", getRuntime());

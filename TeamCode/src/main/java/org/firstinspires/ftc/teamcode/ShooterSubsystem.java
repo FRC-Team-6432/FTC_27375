@@ -41,7 +41,7 @@ public class ShooterSubsystem {
         this.telemetry = telemetry;
     }
 
-    public void handle(boolean shouldShoot, boolean shouldReverseShoot, double power) {
+    public void handle(boolean shouldShoot, boolean shouldReverseShoot) {
         if (shouldShoot && !shooterStateList.contains(ShooterState.SHOOTING)) {
             shooterStateList.add(ShooterState.SHOOTING);
         } else  if (!shouldShoot){
@@ -55,7 +55,7 @@ public class ShooterSubsystem {
 
         switch (getState()) {
             case SHOOTING:
-                shooterMotor.setPower(SHOOTER_MAX_SPEED * power);
+                shooterMotor.setPower(SHOOTER_MAX_SPEED);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
