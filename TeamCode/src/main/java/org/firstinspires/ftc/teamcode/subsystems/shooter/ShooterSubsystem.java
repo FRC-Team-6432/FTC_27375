@@ -1,22 +1,16 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems.shooter;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 import java.util.ArrayList;
 
-enum ShooterState {
-
-    STOPPED,
-    SHOOTING,
-    REVERSESHOOTING,
-}
-
 public class ShooterSubsystem {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
-    private final double SHOOTER_MAX_SPEED = 0.25;
+    private final double SHOOTER_MAX_SPEED = 0.5;
 //    private final double SERVO_OPEN = 1;
 //    private final double SERV0_CLOSED = 0;
 //    private final Servo servo;
@@ -24,13 +18,14 @@ public class ShooterSubsystem {
 
     private final ArrayList<ShooterState> shooterStateList;
 
-    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry){
+    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, DcMotorSimple.Direction direction){
         shooterStateList = new ArrayList<>();
         shooterStateList.add(ShooterState.STOPPED);
 
         this.shooterMotor = shooterMotor;
         if (shooterMotor != null) {
-            this.shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            this.shooterMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            this.shooterMotor.setDirection(direction);
             this.shooterMotor.setPower(0);
         }
 
@@ -42,7 +37,11 @@ public class ShooterSubsystem {
         this.telemetry = telemetry;
     }
 
-    public void handle(boolean shouldShoot, boolean shouldReverseShoot) {
+    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry){
+        this(shooterMotor, telemetry, DcMotorSimple.Direction.FORWARD);
+    }
+
+    public void handle(boolean shouldShoot, boolean shouldReverseShoot, double power) {
         if (shouldShoot && !shooterStateList.contains(ShooterState.SHOOTING)) {
             shooterStateList.add(ShooterState.SHOOTING);
         } else  if (!shouldShoot){
@@ -56,11 +55,11 @@ public class ShooterSubsystem {
 
         switch (getState()) {
             case SHOOTING:
-                shooterMotor.setPower(SHOOTER_MAX_SPEED);
+                shooterMotor.setPower(SHOOTER_MAX_SPEED * power);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
-                shooterMotor.setPower(-SHOOTER_MAX_SPEED);
+                shooterMotor.setPower(-SHOOTER_MAX_SPEED * power);
 //                servo.setPosition(SERVO_OPEN);
                 break;
             case STOPPED:

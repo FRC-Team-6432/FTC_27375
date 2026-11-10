@@ -1,7 +1,5 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.subsystems.drive;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -43,7 +41,6 @@ public class DriveSubsystem {
             this.frontRight.setPower(0);
             this.frontLeft.setPower(0);
         }
-
 
         this.telemetry = telemetry;
     }
