@@ -5,13 +5,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Constants;
 
 import java.util.ArrayList;
 
 public class ShooterSubsystem {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
-    private final double maxPower;
+    private double power;
     private final Servo servo;
 
 
@@ -27,6 +28,7 @@ public class ShooterSubsystem {
             this.shooterMotor.setDirection(direction);
             this.shooterMotor.setPower(0);
         }
+        this.power = Constants.MAX_POWER;
 
         this.servo = servo;
         if(servo != null) {
@@ -36,7 +38,7 @@ public class ShooterSubsystem {
         this.telemetry = telemetry;
     }
 
-    public void handle(boolean shouldShoot, boolean shouldReverseShoot, double power) {
+    public void handle(boolean shouldShoot, boolean shouldReverseShoot) {
         if (shouldShoot && !shooterStateList.contains(ShooterState.SHOOTING)) {
             shooterStateList.add(ShooterState.SHOOTING);
         } else  if (!shouldShoot){
@@ -50,16 +52,16 @@ public class ShooterSubsystem {
 
         switch (getState()) {
             case SHOOTING:
-                shooterMotor.setPower(maxPower * power);
-//                servo.setPosition(SERVO_OPEN);
+                shooterMotor.setPower(power);
+                servo.setPosition(Constants.SERVO_OFFSET + Constants.SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
-                shooterMotor.setPower(-maxPower * power);
-//                servo.setPosition(SERVO_OPEN);
+                shooterMotor.setPower(-power);
+                servo.setPosition(Constants.SERVO_OFFSET + Constants.SERVO_OPEN);
                 break;
             case STOPPED:
                 shooterMotor.setPower(0);
-//                servo.setPosition(SERV0_CLOSED);
+                servo.setPosition(Constants.SERVO_OFFSET + Constants.SERV0_CLOSED);
                 break;
         }
     }
