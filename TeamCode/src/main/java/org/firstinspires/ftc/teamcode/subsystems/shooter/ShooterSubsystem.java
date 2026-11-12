@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.subsystems.shooter;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -11,18 +12,14 @@ public class ShooterSubsystem {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
     private final double maxPower;
-//    private final double SERVO_OPEN = 1;
-//    private final double SERV0_CLOSED = 0;
-//    private final Servo servo;
+    private final Servo servo;
 
 
     private final ArrayList<ShooterState> shooterStateList;
 
-    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, DcMotorSimple.Direction direction, double maxPower){
+    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, DcMotorSimple.Direction direction, Servo  servo){
         shooterStateList = new ArrayList<>();
         shooterStateList.add(ShooterState.STOPPED);
-
-        this.maxPower = maxPower;
 
         this.shooterMotor = shooterMotor;
         if (shooterMotor != null) {
@@ -31,16 +28,12 @@ public class ShooterSubsystem {
             this.shooterMotor.setPower(0);
         }
 
-//        this.servo = servo;
-//        if(servo != null) {
-//            this.servo.setDirection(Servo.Direction.FORWARD);
-//        }
+        this.servo = servo;
+        if(servo != null) {
+            this.servo.setDirection(Servo.Direction.FORWARD);
+        }
 
         this.telemetry = telemetry;
-    }
-
-    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, double maxPower){
-        this(shooterMotor, telemetry, DcMotorSimple.Direction.FORWARD, maxPower);
     }
 
     public void handle(boolean shouldShoot, boolean shouldReverseShoot, double power) {
