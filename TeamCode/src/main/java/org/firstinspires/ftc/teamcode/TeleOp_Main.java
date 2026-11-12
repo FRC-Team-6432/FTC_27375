@@ -44,6 +44,13 @@ public class TeleOp_Main extends LinearOpMode {
         );
 
         telemetry.addLine("Initialised!");
+        if (hardwareMap.tryGet(Servo.class,Constants.NECTARSHOOTER_SERVO) != null) {
+            telemetry.addLine("nectar servo ok");
+        }
+
+        if (hardwareMap.tryGet(Servo.class,Constants.POLLENSHOOTER_SERVO) != null) {
+            telemetry.addLine("pollen servo ok");
+        }
         telemetry.update();
 
         waitForStart();
@@ -57,6 +64,9 @@ public class TeleOp_Main extends LinearOpMode {
                 pollenShooter.handle(gamepad1.right_trigger_pressed, false);
                 nectarShooter.handle(gamepad1.left_trigger_pressed, false);
                 intake.handle(gamepad1.right_bumper, gamepad1.left_bumper);
+
+                pollenShooter.calibrate(gamepad1.dpadLeftWasPressed(), gamepad1.dpadRightWasPressed(),gamepad1.xWasPressed(),gamepad1.bWasPressed());
+                nectarShooter.calibrate(gamepad1.dpadUpWasPressed(), gamepad1.dpadDownWasPressed(),gamepad1.yWasPressed(),gamepad1.aWasPressed());
 
                 telemetry.addData("Runtime: ", getRuntime());
                 pollenShooter.telemetry();

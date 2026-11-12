@@ -13,6 +13,7 @@ public class ShooterSubsystem {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
     private double power;
+    private double offset;
     private final Servo servo;
 
 
@@ -29,6 +30,7 @@ public class ShooterSubsystem {
             this.shooterMotor.setPower(0);
         }
         this.power = Constants.MAX_POWER;
+        this.offset = Constants.SERVO_OFFSET;
 
         this.servo = servo;
         if(servo != null) {
@@ -53,16 +55,30 @@ public class ShooterSubsystem {
         switch (getState()) {
             case SHOOTING:
                 shooterMotor.setPower(power);
-                servo.setPosition(Constants.SERVO_OFFSET + Constants.SERVO_OPEN);
+                servo.setPosition(offset + Constants.SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
                 shooterMotor.setPower(-power);
-                servo.setPosition(Constants.SERVO_OFFSET + Constants.SERVO_OPEN);
+                servo.setPosition(offset + Constants.SERVO_OPEN);
                 break;
             case STOPPED:
                 shooterMotor.setPower(0);
-                servo.setPosition(Constants.SERVO_OFFSET + Constants.SERV0_CLOSED);
+                servo.setPosition(offset + Constants.SERV0_CLOSED);
                 break;
+        }
+    }
+
+    public void calibrate(boolean increasePower, boolean decreasePower, boolean increaseOffset, boolean decreaseOffset) {
+        if (increasePower) {
+            this.power += 0.01;
+        } else if (decreasePower){
+            this.power -= 0.01;
+        }
+
+        if (increaseOffset) {
+            this.offset += 0.01;
+        }else if (decreaseOffset) {
+            this.offset -= 0.01;
         }
     }
 
@@ -72,5 +88,7 @@ public class ShooterSubsystem {
 
     public void telemetry() {
         telemetry.addData("Shooter State: ", this.getState());
+        telemetry.addData("Power", this.power);
+        telemetry.addData("Offset", this.offset);
     }
 }
