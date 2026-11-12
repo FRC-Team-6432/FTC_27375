@@ -28,8 +28,8 @@ public class DriveSubsystem {
         this.backRight = backRight;
 
         if (frontLeft != null && frontRight != null && backLeft != null && backRight != null) {
-            frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
-            backLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+            frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+            backRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
             frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
             frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -53,10 +53,10 @@ public class DriveSubsystem {
 
     public void drive() {
         // drive code
-        frontLeft.setPower(forward+rotate+strafe);
-        frontRight.setPower(forward-rotate-strafe);
-        backLeft.setPower(forward+rotate-strafe);
-        backRight.setPower(forward-rotate+strafe);
+        frontLeft.setPower(forward-rotate-strafe);
+        frontRight.setPower(forward+rotate+strafe);
+        backLeft.setPower(forward-rotate+strafe);
+        backRight.setPower(forward+rotate-strafe);
     }
 
     public void setTelemetry(){
