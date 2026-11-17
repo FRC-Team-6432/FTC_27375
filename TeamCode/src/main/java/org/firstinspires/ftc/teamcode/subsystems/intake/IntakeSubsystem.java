@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.subsystems.intake;
 
-import android.graphics.Path;
-
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
@@ -15,21 +13,12 @@ public class IntakeSubsystem {
         private final DcMotor intakeMotor;
         private final ArrayList<IntakeState> intakeStateList;
 
-        public IntakeSubsystem(DcMotor intakeMotor, Telemetry telemetry, DcMotorSimple.Direction direction){
+        public IntakeSubsystem(DcMotor intakeMotor, Telemetry telemetry){
             intakeStateList = new ArrayList<>();
             intakeStateList.add(IntakeState.STOPPED);
 
             this.intakeMotor = intakeMotor;
-            if (intakeMotor != null) {
-                this.intakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-                this.intakeMotor.setDirection(direction);
-                this.intakeMotor.setPower(0);
-            }
             this.telemetry = telemetry;
-        }
-
-        public IntakeSubsystem(DcMotor intakeMotor, Telemetry telemetry){
-            this(intakeMotor, telemetry, DcMotorSimple.Direction.FORWARD);
         }
 
         public void handle(boolean shouldIntake, boolean shouldOuttake) {

@@ -49,7 +49,7 @@ public class DriveSubsystem {
         backRight.setPower(forward+rotate-strafe);
     }
 
-    public void setTelemetry(){
+    public void telemetry(){
         telemetry.addLine("_____DRIVE_____");
         telemetry.addData("forward: ", forward);
         telemetry.addData("rotate: ", rotate);
