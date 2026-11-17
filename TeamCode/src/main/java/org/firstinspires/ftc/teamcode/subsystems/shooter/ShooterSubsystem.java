@@ -5,7 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Constants.Constants25573;
+import org.firstinspires.ftc.teamcode.Constants.Constants27375;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,6 @@ public class ShooterSubsystem {
     private double power;
     private double offset;
     private final Servo servo;
-
 
     private final ArrayList<ShooterState> shooterStateList;
 
@@ -29,8 +29,8 @@ public class ShooterSubsystem {
             this.shooterMotor.setDirection(direction);
             this.shooterMotor.setPower(0);
         }
-        this.power = Constants.MAX_POWER;
-        this.offset = Constants.SERVO_OFFSET;
+        this.power = Constants25573.MAX_POWER;
+        this.offset = Constants25573.SERVO_OFFSET;
 
         this.servo = servo;
         if(servo != null) {
@@ -55,15 +55,15 @@ public class ShooterSubsystem {
         switch (getState()) {
             case SHOOTING:
                 shooterMotor.setPower(power);
-                servo.setPosition(offset + Constants.SERVO_OPEN);
+                servo.setPosition(offset + Constants25573.SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
                 shooterMotor.setPower(-power);
-                servo.setPosition(offset + Constants.SERVO_OPEN);
+                servo.setPosition(offset + Constants25573.SERVO_OPEN);
                 break;
             case STOPPED:
                 shooterMotor.setPower(0);
-                servo.setPosition(offset + Constants.SERV0_CLOSED);
+                servo.setPosition(offset + Constants25573.SERV0_CLOSED);
                 break;
         }
     }

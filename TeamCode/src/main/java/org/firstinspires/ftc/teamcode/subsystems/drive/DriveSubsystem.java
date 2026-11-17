@@ -27,20 +27,10 @@ public class DriveSubsystem {
         this.backLeft = backLeft;
         this.backRight = backRight;
 
-        if (frontLeft != null && frontRight != null && backLeft != null && backRight != null) {
-            frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
-            backRight.setDirection(DcMotorSimple.Direction.REVERSE);
-
-            frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-            backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-            this.backLeft.setPower(0);
-            this.backRight.setPower(0);
-            this.frontRight.setPower(0);
-            this.frontLeft.setPower(0);
-        }
+        this.backLeft.setPower(0);
+        this.backRight.setPower(0);
+        this.frontRight.setPower(0);
+        this.frontLeft.setPower(0);
 
         this.telemetry = telemetry;
     }

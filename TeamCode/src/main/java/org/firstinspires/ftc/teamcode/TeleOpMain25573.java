@@ -6,49 +6,62 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.Constants.Constants25573;
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterDirection;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem;
 
 
 @TeleOp
-public class TeleOp_Main extends LinearOpMode {
+public class TeleOpMain25573 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
         // TODO: add initialise code here
         ShooterSubsystem pollenShooter = new ShooterSubsystem(
-                hardwareMap.tryGet(DcMotor.class, Constants.POLLENSHOOTER_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants25573.POLLENSHOOTER_MOTOR),
                 telemetry,
                 DcMotorSimple.Direction.REVERSE,
-                hardwareMap.tryGet(Servo.class,Constants.POLLENSHOOTER_SERVO)
+                hardwareMap.tryGet(Servo.class, Constants25573.POLLENSHOOTER_SERVO)
         );
 
         ShooterSubsystem nectarShooter = new ShooterSubsystem(
-                hardwareMap.tryGet(DcMotor.class, Constants.NECTARSHOOTER_MOTOR),
+                hardwareMap.tryGet(DcMotor.class, Constants25573.NECTARSHOOTER_MOTOR),
                 telemetry,
                 DcMotorSimple.Direction.FORWARD,
-                hardwareMap.tryGet(Servo.class,Constants.NECTARSHOOTER_SERVO)
+                hardwareMap.tryGet(Servo.class, Constants25573.NECTARSHOOTER_SERVO)
         );
 
         IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.tryGet(DcMotor.class,
-                Constants.INTAKE_MOTOR), telemetry);
+                Constants25573.INTAKE_MOTOR), telemetry);
+
+        DcMotor frontLeft = hardwareMap.get(DcMotor.class, Constants25573.FRONT_LEFT_MOTOR);
+        DcMotor frontRight = hardwareMap.get(DcMotor.class, Constants25573.FRONT_RIGHT_MOTOR);
+        DcMotor backLeft = hardwareMap.get(DcMotor.class, Constants25573.BACK_LEFT_MOTOR);
+        DcMotor backRight = hardwareMap.get(DcMotor.class, Constants25573.BACK_RIGHT_MOTOR);
+
+        backRight.setDirection(DcMotorSimple.Direction.REVERSE);
+        frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         DriveSubsystem drive = new DriveSubsystem(
-                hardwareMap.tryGet(DcMotor.class, Constants.FRONT_LEFT_MOTOR),
-                hardwareMap.tryGet(DcMotor.class, Constants.FRONT_RIGHT_MOTOR),
-                hardwareMap.tryGet(DcMotor.class, Constants.BACK_LEFT_MOTOR),
-                hardwareMap.tryGet(DcMotor.class, Constants.BACK_RIGHT_MOTOR),
+                frontLeft,
+                frontRight,
+                backLeft,
+                backRight,
                 telemetry
         );
 
         telemetry.addLine("Initialised!");
-        if (hardwareMap.tryGet(Servo.class,Constants.NECTARSHOOTER_SERVO) != null) {
+        if (hardwareMap.tryGet(Servo.class, Constants25573.NECTARSHOOTER_SERVO) != null) {
             telemetry.addLine("nectar servo ok");
         }
 
-        if (hardwareMap.tryGet(Servo.class,Constants.POLLENSHOOTER_SERVO) != null) {
+        if (hardwareMap.tryGet(Servo.class, Constants25573.POLLENSHOOTER_SERVO) != null) {
             telemetry.addLine("pollen servo ok");
         }
         telemetry.update();
