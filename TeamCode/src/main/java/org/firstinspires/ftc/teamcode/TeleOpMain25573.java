@@ -19,17 +19,23 @@ public class TeleOpMain25573 extends LinearOpMode {
     public void runOpMode() {
         // TODO: add initialise code here
         ShooterSubsystem pollenShooter = new ShooterSubsystem(
+                "Pollen Shooter",
                 hardwareMap.tryGet(DcMotor.class, Constants25573.POLLENSHOOTER_MOTOR),
-                telemetry,
+                hardwareMap.tryGet(Servo.class, Constants25573.POLLENSHOOTER_SERVO),
                 DcMotorSimple.Direction.REVERSE,
-                hardwareMap.tryGet(Servo.class, Constants25573.POLLENSHOOTER_SERVO)
+                Constants25573.POLLEN_SERVO_OFFSET,
+                Constants25573.POLLEN_POWER,
+                telemetry
         );
 
         ShooterSubsystem nectarShooter = new ShooterSubsystem(
+                "Nectar Shooter",
                 hardwareMap.tryGet(DcMotor.class, Constants25573.NECTARSHOOTER_MOTOR),
-                telemetry,
+                hardwareMap.tryGet(Servo.class, Constants25573.NECTARSHOOTER_SERVO),
                 DcMotorSimple.Direction.FORWARD,
-                hardwareMap.tryGet(Servo.class, Constants25573.NECTARSHOOTER_SERVO)
+                Constants25573.NECTAR_SERVO_OFFSET,
+                Constants25573.NECTAR_POWER,
+                telemetry
         );
 
         IntakeSubsystem intake = new IntakeSubsystem(hardwareMap.tryGet(DcMotor.class,
@@ -74,12 +80,16 @@ public class TeleOpMain25573 extends LinearOpMode {
                 //TODO: add loop code here
                 drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 drive.drive();
-                pollenShooter.handle(gamepad1.right_trigger_pressed, false);
-                nectarShooter.handle(gamepad1.left_trigger_pressed, false);
-                intake.handle(gamepad1.right_bumper, gamepad1.left_bumper);
+                pollenShooter.handle(gamepad1.right_trigger_pressed, false, gamepad1.right_bumper);
+                nectarShooter.handle(gamepad1.left_trigger_pressed, false, gamepad1.left_bumper);
+                intake.handle(gamepad1.a, gamepad1.b);
 
-                pollenShooter.calibrate(gamepad1.dpadLeftWasPressed(), gamepad1.dpadRightWasPressed(),gamepad1.xWasPressed(),gamepad1.bWasPressed());
-                nectarShooter.calibrate(gamepad1.dpadUpWasPressed(), gamepad1.dpadDownWasPressed(),gamepad1.yWasPressed(),gamepad1.aWasPressed());
+//                pollenShooter.calibrateOffset(gamepad1.dpadLeftWasPressed(), gamepad1.dpadRightWasPressed(), 0.02);
+//                nectarShooter.calibrateOffset(gamepad1.dpadUpWasPressed(), gamepad1.dpadDownWasPressed(), 0.02);
+
+                nectarShooter.calibratePower(gamepad1.dpadLeftWasPressed(), gamepad1.dpadRightWasPressed(), 0.02);
+                pollenShooter.calibratePower(gamepad1.dpadUpWasPressed(), gamepad1.dpadDownWasPressed(), 0.02);
+
 
                 telemetry.addData("Runtime: ", getRuntime());
                 pollenShooter.telemetry();
