@@ -11,15 +11,16 @@ import org.firstinspires.ftc.teamcode.Constants.Constants27375;
 import java.util.ArrayList;
 
 public class ShooterSubsystem {
+    private final String name;
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
     private double power;
-    private double offset;
+    private double servo_offset;
     private final Servo servo;
 
     private final ArrayList<ShooterState> shooterStateList;
 
-    public ShooterSubsystem(DcMotor shooterMotor, Telemetry telemetry, DcMotorSimple.Direction direction, Servo  servo){
+    public ShooterSubsystem(String name, DcMotor shooterMotor, Servo servo, DcMotorSimple.Direction direction, double servo_offset, double power, Telemetry telemetry){
         shooterStateList = new ArrayList<>();
         shooterStateList.add(ShooterState.STOPPED);
 
@@ -29,21 +30,22 @@ public class ShooterSubsystem {
             this.shooterMotor.setDirection(direction);
             this.shooterMotor.setPower(0);
         }
-        this.power = Constants25573.MAX_POWER;
-        this.offset = Constants25573.SERVO_OFFSET;
+        this.power = power;
 
         this.servo = servo;
         if(servo != null) {
             this.servo.setDirection(Servo.Direction.FORWARD);
         }
 
+        this.servo_offset = servo_offset;
         this.telemetry = telemetry;
+        this.name = name;
     }
 
-    public void handle(boolean shouldShoot, boolean shouldReverseShoot) {
-        if (shouldShoot && !shooterStateList.contains(ShooterState.SHOOTING)) {
+    public void handle(boolean shouldSpin, boolean shouldReverseShoot, boolean shouldShoot) {
+        if (shouldSpin && !shooterStateList.contains(ShooterState.SHOOTING)) {
             shooterStateList.add(ShooterState.SHOOTING);
-        } else  if (!shouldShoot){
+        } else  if (!shouldSpin){
             shooterStateList.remove(ShooterState.SHOOTING);
         }
         if (shouldReverseShoot && !shooterStateList.contains(ShooterState.REVERSESHOOTING)) {
@@ -55,30 +57,46 @@ public class ShooterSubsystem {
         switch (getState()) {
             case SHOOTING:
                 shooterMotor.setPower(power);
-                servo.setPosition(offset + Constants25573.SERVO_OPEN);
                 break;
             case REVERSESHOOTING:
                 shooterMotor.setPower(-power);
-                servo.setPosition(offset + Constants25573.SERVO_OPEN);
                 break;
             case STOPPED:
                 shooterMotor.setPower(0);
-                servo.setPosition(offset + Constants25573.SERV0_CLOSED);
                 break;
+        }
+
+        if (shouldShoot) {
+            servo.setPosition(servo_offset + Constants25573.SERVO_OPEN);
+        } else {
+            servo.setPosition(servo_offset + Constants25573.SERV0_CLOSED);
+        }
+
+    }
+
+    public void calibratePower(boolean increasePower, boolean decreasePower, double step) {
+        double newPower = this.power;
+        if (increasePower) {
+            newPower += step;
+        } else if (decreasePower){
+            newPower -= step;
+        }
+
+        if (newPower >= 0 && newPower <= 1) {
+            this.power = newPower;
         }
     }
 
-    public void calibrate(boolean increasePower, boolean decreasePower, boolean increaseOffset, boolean decreaseOffset) {
-        if (increasePower) {
-            this.power += 0.01;
-        } else if (decreasePower){
-            this.power -= 0.01;
+    public void calibrateOffset(boolean increaseOffset, boolean decreaseOffset, double step){
+        double newOffset = this.servo_offset;
+        if (increaseOffset) {
+            newOffset += step;
+        } else if (decreaseOffset){
+            newOffset -= step;
         }
 
-        if (increaseOffset) {
-            this.offset += 0.01;
-        }else if (decreaseOffset) {
-            this.offset -= 0.01;
+        if (newOffset >= 0 && newOffset <= 1) {
+            this.servo_offset = newOffset;
         }
     }
 
@@ -87,8 +105,10 @@ public class ShooterSubsystem {
     }
 
     public void telemetry() {
+        telemetry.addLine("_____________");
+        telemetry.addLine(this.name);
         telemetry.addData("Shooter State: ", this.getState());
         telemetry.addData("Power", this.power);
-        telemetry.addData("Offset", this.offset);
+        telemetry.addData("Offset", this.servo_offset);
     }
 }

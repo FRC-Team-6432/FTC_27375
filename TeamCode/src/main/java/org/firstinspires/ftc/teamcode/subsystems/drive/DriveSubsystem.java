@@ -43,10 +43,10 @@ public class DriveSubsystem {
 
     public void drive() {
         // drive code
-        frontLeft.setPower(forward-rotate-strafe);
-        frontRight.setPower(forward+rotate+strafe);
-        backLeft.setPower(forward-rotate+strafe);
-        backRight.setPower(forward+rotate-strafe);
+        frontLeft.setPower(forward+rotate+strafe);
+        frontRight.setPower(forward-rotate-strafe);
+        backLeft.setPower(forward+rotate-strafe);
+        backRight.setPower(forward-rotate+strafe);
     }
 
     public void setTelemetry(){

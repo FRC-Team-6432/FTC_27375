@@ -7,11 +7,14 @@ public class Constants25573 {
     public static String BACK_RIGHT_MOTOR = "back right";
     public static String POLLENSHOOTER_MOTOR = "pollen shooter";
     public static String NECTARSHOOTER_MOTOR = "nectar shooter";
+    public static String POLLENSHOOTER_SERVO = "pollen gate";
+    public static String NECTARSHOOTER_SERVO = "nectar gate";
     public static String INTAKE_MOTOR = "intake";
     public static final double SERVO_OPEN = 90.0 / 300.0;
     public static final double SERV0_CLOSED = 0;
-    public static final double SERVO_OFFSET = 0;
-    public static final double MAX_POWER = 1;
-    public static String POLLENSHOOTER_SERVO = "pollen gate";
-    public static String NECTARSHOOTER_SERVO = "nectar gate";
+    public static final double POLLEN_SERVO_OFFSET = 0.12;
+    public static final double NECTAR_SERVO_OFFSET = 0.57;
+    public static final double POLLEN_POWER = 0.46;
+    public static final double NECTAR_POWER = 0.7;
+
 }
