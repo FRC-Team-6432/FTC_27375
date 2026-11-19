@@ -61,6 +61,6 @@ public class ShooterSubsystem27375 {
 
     public void telemetry() {
         telemetry.addData("Shooter State: ", this.getState());
-        telemetry.addData("Power", this.power);
+        telemetry.addData("Shooter Power", this.power);
     }
 }

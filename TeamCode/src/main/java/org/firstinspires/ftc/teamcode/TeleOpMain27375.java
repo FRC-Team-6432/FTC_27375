@@ -27,9 +27,9 @@ public class TeleOpMain27375 extends LinearOpMode {
         );
 
         DcMotor intakeMotor = hardwareMap.get(DcMotor.class, Constants27375.INTAKE_MOTOR);
-        shooterMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        intakeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         IntakeSubsystem intakeSubsystem = new IntakeSubsystem(
-                shooterMotor,
+                intakeMotor,
                 telemetry
         );
 
@@ -66,10 +66,12 @@ public class TeleOpMain27375 extends LinearOpMode {
                 drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
                 drive.drive();
 
-                shooterSubsystem.handle(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
+                shooterSubsystem.handle(gamepad1.left_bumper, gamepad1.left_trigger_pressed);
+                intakeSubsystem.handle(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
 
                 telemetry.addData("Runtime: ", getRuntime());
                 drive.telemetry();
+                intakeSubsystem.telemetry();
                 shooterSubsystem.telemetry();
                 telemetry.update();
             }
