@@ -1,25 +1,37 @@
 package org.firstinspires.ftc.teamcode.subsystems.shooter;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Constants.Constants25573;
 
 import java.util.ArrayList;
 
-public class ShooterSubsystem27375 {
+public class
+ShooterSubsystem27375 {
     private final DcMotor shooterMotor;
     private final Telemetry telemetry;
     private double power;
+//    private double servo_offset;
+//    private final Servo servo;
 
     private final ArrayList<ShooterState> shooterStateList;
 
-    public ShooterSubsystem27375(DcMotor shooterMotor, double power, Telemetry telemetry){
+    public ShooterSubsystem27375(DcMotor shooterMotor, Servo servo, double power, Telemetry telemetry){
         shooterStateList = new ArrayList<>();
         shooterStateList.add(ShooterState.STOPPED);
 
         this.shooterMotor = shooterMotor;
         this.power = power;
         this.telemetry = telemetry;
+//
+//        this.servo = servo;
+//        if(servo != null) {
+//            this.servo.setDirection(Servo.Direction.FORWARD);
+//        }
+
+
     }
 
     public void handle(boolean shouldShoot, boolean shouldReverseShoot) {
@@ -63,4 +75,7 @@ public class ShooterSubsystem27375 {
         telemetry.addData("Shooter State: ", this.getState());
         telemetry.addData("Shooter Power", this.power);
     }
-}
+
+
+
+    }

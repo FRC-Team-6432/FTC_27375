@@ -8,4 +8,6 @@ public class Constants27375 {
         public static String FRONT_RIGHT_MOTOR = "frontRight";
         public static String BACK_LEFT_MOTOR = "backLeft";
         public static String BACK_RIGHT_MOTOR = "backRight";
+        public static String SERVO = "servo";
+        public static String WEBCAM = "Webcam 1";
 }
