@@ -104,7 +104,8 @@ public class TeleOpMain25573 extends LinearOpMode {
                     drive.goToTargetPose(
                             ftcPose,
                             targetPose,
-                            0.005
+                            0.004,
+                            0.01
                     );
                 } else {
                     drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);

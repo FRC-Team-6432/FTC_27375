@@ -11,18 +11,13 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 import java.util.ArrayList;
 
 public class DriveSubsystem {
-
-   private final DcMotor frontLeft;
+    private final DcMotor frontLeft;
     private final DcMotor frontRight;
     private final DcMotor backLeft;
     private final DcMotor backRight;
-
     private final Telemetry telemetry;
-
     private double forward;
-
     private double rotate;
-
     private double strafe;
 
     public DriveSubsystem(DcMotor frontLeft, DcMotor frontRight, DcMotor backLeft, DcMotor backRight, Telemetry telemetry) {
@@ -47,15 +42,15 @@ public class DriveSubsystem {
     }
 
     public void drive() {
-        // drive code
         frontLeft.setPower(forward+rotate+strafe);
         frontRight.setPower(forward-rotate-strafe);
         backLeft.setPower(forward+rotate-strafe);
         backRight.setPower(forward-rotate+strafe);
     }
 
-    public void goToTargetPose(AprilTagPoseFtc currentPose, AprilTagPoseFtc targetPose, double gain) {
+    public void goToTargetPose(AprilTagPoseFtc currentPose, AprilTagPoseFtc targetPose, double translateGain, double yawGain) {
         if (currentPose == null || targetPose == null) {
+            setDriveParameters(0,0,0);
             return;
         }
 
@@ -63,9 +58,7 @@ public class DriveSubsystem {
         double yError = targetPose.y - currentPose.y;
         double yawError = targetPose.yaw - currentPose.yaw;
 
-        this.forward = yError * -gain;
-        this.strafe = xError * gain;
-        this.rotate = yawError * gain;
+        setDriveParameters(yError * -translateGain, xError * translateGain, yawError * yawGain);
     }
 
     public void telemetry(){
