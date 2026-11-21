@@ -6,10 +6,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.robotcore.external.navigation.Position;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Constants.Constants25573;
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem;
+import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
 
 @TeleOp
@@ -62,6 +69,11 @@ public class TeleOpMain25573 extends LinearOpMode {
                 telemetry
         );
 
+        AprilTagVision aprilTagVision = new AprilTagVision(
+                hardwareMap.get(WebcamName.class, "Webcam 1"),
+                telemetry
+        );
+
         telemetry.addLine("Initialised!");
         if (hardwareMap.tryGet(Servo.class, Constants25573.NECTARSHOOTER_SERVO) != null) {
             telemetry.addLine("nectar servo ok");
@@ -78,10 +90,29 @@ public class TeleOpMain25573 extends LinearOpMode {
         if (opModeIsActive()) {
             while (opModeIsActive()) {
                 //TODO: add loop code here
-                drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
+                AprilTagPoseFtc ftcPose = aprilTagVision.getFtcPose();
+                AprilTagPoseFtc targetPose = new AprilTagPoseFtc(
+                        0,
+                        -1000,
+                        0
+                        , 0, 0, 0,
+                        0,
+                        0,
+                        0
+                );
+                if (gamepad1.x) {
+                    drive.goToTargetPose(
+                            ftcPose,
+                            targetPose,
+                            0.005
+                    );
+                } else {
+                    drive.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);
+                }
+
                 drive.drive();
-                pollenShooter.handle(gamepad1.right_trigger_pressed, false, gamepad1.right_bumper);
-                nectarShooter.handle(gamepad1.left_trigger_pressed, false, gamepad1.left_bumper);
+                pollenShooter.handle(gamepad1.left_trigger_pressed, false, gamepad1.left_bumper);
+                nectarShooter.handle(gamepad1.right_trigger_pressed, false, gamepad1.right_bumper);
                 intake.handle(gamepad1.a, gamepad1.b);
 
 //                pollenShooter.calibrateOffset(gamepad1.dpadLeftWasPressed(), gamepad1.dpadRightWasPressed(), 0.02);
@@ -92,11 +123,14 @@ public class TeleOpMain25573 extends LinearOpMode {
 
 
                 telemetry.addData("Runtime: ", getRuntime());
-                pollenShooter.telemetry();
-                nectarShooter.telemetry();
-                intake.telemetry();
+                aprilTagVision.telemetry();
+//                pollenShooter.telemetry();
+//                nectarShooter.telemetry();
+//                intake.telemetry();
+                drive.telemetry();
                 telemetry.update();
             }
+            aprilTagVision.closeVisionPortal();
         }
     }
 }

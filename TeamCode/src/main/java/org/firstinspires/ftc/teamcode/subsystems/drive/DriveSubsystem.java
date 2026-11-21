@@ -4,6 +4,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.teamcode.AprilTagVision;
+import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
+
+import java.util.ArrayList;
 
 public class DriveSubsystem {
 
@@ -47,6 +52,20 @@ public class DriveSubsystem {
         frontRight.setPower(forward-rotate-strafe);
         backLeft.setPower(forward+rotate-strafe);
         backRight.setPower(forward-rotate+strafe);
+    }
+
+    public void goToTargetPose(AprilTagPoseFtc currentPose, AprilTagPoseFtc targetPose, double gain) {
+        if (currentPose == null || targetPose == null) {
+            return;
+        }
+
+        double xError = targetPose.x - currentPose.x;
+        double yError = targetPose.y - currentPose.y;
+        double yawError = targetPose.yaw - currentPose.yaw;
+
+        this.forward = yError * -gain;
+        this.strafe = xError * gain;
+        this.rotate = yawError * gain;
     }
 
     public void telemetry(){
