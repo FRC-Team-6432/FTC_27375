@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode.Constants;
+package org.firstinspires.ftc.teamcode.constants;
+
+import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
 public class Constants25573 {
     public static String FRONT_LEFT_MOTOR = "front left";
@@ -17,5 +19,11 @@ public class Constants25573 {
     public static final double NECTAR_SERVO_OFFSET = 0.57;
     public static final double POLLEN_POWER = 0.51;
     public static final double NECTAR_POWER = 0.7;
-
+    public static final AprilTagPoseFtc SHOOTING_POSE = new AprilTagPoseFtc(
+            0, -1400, 0,
+            0, 0, 0,
+            0, 0, 0
+    );
+    public static final double TRANSLATE_GAIN = 0.003;
+    public static final double YAW_GAIN = 0.05;
 }

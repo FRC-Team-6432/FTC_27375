@@ -1,14 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystems.drive;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
-import org.firstinspires.ftc.teamcode.AprilTagVision;
 import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
-
-import java.util.ArrayList;
 
 public class DriveSubsystem {
     private final DcMotor frontLeft;

@@ -1,13 +1,13 @@
-package org.firstinspires.ftc.teamcode.Auto27375;
+package org.firstinspires.ftc.teamcode.auto27375;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotContainer27375;
+import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer27375;
 import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
 @TeleOp
-public class AutoCode4 extends LinearOpMode {
+public class AutoCode2 extends LinearOpMode {
     //TODO: define motors, sensors, processors here
 
     @Override

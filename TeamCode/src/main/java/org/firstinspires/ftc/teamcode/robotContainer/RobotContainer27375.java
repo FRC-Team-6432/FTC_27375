@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.robotContainer;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -7,11 +7,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Constants.Constants27375;
+import org.firstinspires.ftc.teamcode.constants.Constants27375;
 import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeSubsystem;
-import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem27375;
+import org.firstinspires.ftc.teamcode.vision.AprilTagVision;
 
 public class RobotContainer27375 {
     public final DriveSubsystem driveSubsystem;
@@ -58,6 +58,9 @@ public class RobotContainer27375 {
         );
 
         this.aprilTagVision = new AprilTagVision(hardwareMap.get(WebcamName.class, Constants27375.WEBCAM), telemetry);
+
+        telemetry.addLine("Initialised!");
+        telemetry.update();
     }
 
 

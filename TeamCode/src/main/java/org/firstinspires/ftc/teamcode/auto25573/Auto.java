@@ -1,10 +1,9 @@
-package org.firstinspires.ftc.teamcode.Auto25573;
+package org.firstinspires.ftc.teamcode.auto25573;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.RobotContainer25573;
+import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
 import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
 @Autonomous

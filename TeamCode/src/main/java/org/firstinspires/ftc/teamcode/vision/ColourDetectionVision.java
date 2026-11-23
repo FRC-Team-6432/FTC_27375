@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.vision;
 
 import com.qualcomm.hardware.dfrobot.HuskyLens;
 
@@ -29,7 +29,6 @@ public class ColourDetectionVision {
         for (HuskyLens.Block block : huskyLens.blocks()) {
             this.telemetry.addLine(block.toString());
         }
-
     }
 }
 

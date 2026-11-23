@@ -5,8 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.Constants.Constants25573;
-import org.firstinspires.ftc.teamcode.Constants.Constants27375;
+import org.firstinspires.ftc.teamcode.constants.Constants25573;
 
 import java.util.ArrayList;
 

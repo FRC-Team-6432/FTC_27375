@@ -1,4 +1,6 @@
-package org.firstinspires.ftc.teamcode.Constants;
+package org.firstinspires.ftc.teamcode.constants;
+
+import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
 public class Constants27375 {
         public static final String SHOOTER_MOTOR = "shooterMotor" ;
@@ -10,4 +12,11 @@ public class Constants27375 {
         public static String BACK_RIGHT_MOTOR = "backRight";
         public static String SERVO = "servo";
         public static String WEBCAM = "Webcam 1";
+        public static final AprilTagPoseFtc SHOOTING_POSE = new AprilTagPoseFtc(
+                0, -1400, 0,
+                0, 0, 0,
+                0, 0, 0
+        );
+        public static final double TRANSLATE_GAIN = 0;
+        public static final double YAW_GAIN = 0;
 }
