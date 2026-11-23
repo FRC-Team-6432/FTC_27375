@@ -15,7 +15,7 @@ public class Constants25573 {
     public static final double SERV0_CLOSED = 0;
     public static final double POLLEN_SERVO_OFFSET = 0.12;
     public static final double NECTAR_SERVO_OFFSET = 0.57;
-    public static final double POLLEN_POWER = 0.46;
+    public static final double POLLEN_POWER = 0.51;
     public static final double NECTAR_POWER = 0.7;
 
 }

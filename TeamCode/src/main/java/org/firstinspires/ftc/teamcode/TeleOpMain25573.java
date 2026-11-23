@@ -40,7 +40,7 @@ public class TeleOpMain25573 extends LinearOpMode {
                 AprilTagPoseFtc ftcPose = robot.aprilTagVision.getFtcPose();
                 AprilTagPoseFtc targetPose = new AprilTagPoseFtc(
                         0,
-                        -1000,
+                        -1400,
                         0
                         , 0, 0, 0,
                         0,
@@ -51,8 +51,8 @@ public class TeleOpMain25573 extends LinearOpMode {
                     robot.drivebase.goToTargetPose(
                             ftcPose,
                             targetPose,
-                            0.004,
-                            0.01
+                            0.003,
+                            0.05
                     );
                 } else {
                     robot.drivebase.setDriveParameters(-gamepad1.left_stick_y, gamepad1.right_stick_x, gamepad1.left_stick_x);

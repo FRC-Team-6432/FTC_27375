@@ -58,7 +58,7 @@ public class DriveSubsystem {
         double yError = targetPose.y - currentPose.y;
         double yawError = targetPose.yaw - currentPose.yaw;
 
-        setDriveParameters(yError * -translateGain, xError * translateGain, yawError * yawGain);
+        setDriveParameters(yError * -translateGain, yawError * yawGain,xError * translateGain);
     }
 
     public void telemetry(){
