@@ -46,6 +46,8 @@ public class DriveAimShoot25573 {
                     Constants27375.YAW_GAIN
             );
             robot.driveSubsystem.drive();
+            opMode.telemetry.addData("AimTimer:", aimTimer.seconds());
+            opMode.telemetry.update();
         }
 
         // Stop
@@ -57,6 +59,8 @@ public class DriveAimShoot25573 {
         robot.pollenShooter.handle(true, false, false);
         while (opMode.opModeIsActive() && shootTimer.seconds() < shootSeconds) {
             opMode.sleep(20);
+            opMode.telemetry.addData("ShootTimer:", shootTimer.seconds());
+            opMode.telemetry.update();
         }
         robot.pollenShooter.handle(false, false, false);
     }

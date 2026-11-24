@@ -22,8 +22,8 @@ public class Auto extends LinearOpMode {
                 this.robot =  new RobotContainer25573(hardwareMap, telemetry);
                 driveAimShoot25573 = new DriveAimShoot25573(
                         this, robot,
-                        0, 0, 1,
-                        3, 3
+                        0, 0, -0.5,
+                        10, 10
                 );
 
                 waitForStart();
