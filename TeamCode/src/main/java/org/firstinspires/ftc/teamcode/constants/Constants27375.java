@@ -10,13 +10,12 @@ public class Constants27375 {
         public static String FRONT_RIGHT_MOTOR = "frontRight";
         public static String BACK_LEFT_MOTOR = "backLeft";
         public static String BACK_RIGHT_MOTOR = "backRight";
-        public static String SERVO = "servo";
         public static String WEBCAM = "Webcam 1";
         public static final AprilTagPoseFtc SHOOTING_POSE = new AprilTagPoseFtc(
                 0, -1400, 0,
                 0, 0, 0,
                 0, 0, 0
         );
-        public static final double TRANSLATE_GAIN = 0;
-        public static final double YAW_GAIN = 0;
+        public static final double TRANSLATE_GAIN = 0.003;
+        public static final double YAW_GAIN = 0.02;
 }
