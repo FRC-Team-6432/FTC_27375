@@ -71,12 +71,13 @@ public class AprilTagVision27375 {
 
     public AprilTagPoseFtc getFtcPose() {
         ArrayList<AprilTagClusterDetection> validTags = getValidTags();
-        this.ftcPose = null;
         if (!validTags.isEmpty()) {
             validTags.sort(Comparator.comparing((AprilTagClusterDetection detection) -> detection.ftcPose.range));
             this.ftcPose = changeCoords(validTags.get(0).ftcPose, 60);
             telemetry.addLine(validTags.get(0).metadata.fieldOrientation.toString());
             telemetry.addLine(validTags.get(0).metadata.fieldPosition.toString());
+        } else {
+            this.ftcPose = null;
         }
         return this.ftcPose;
     }
