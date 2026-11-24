@@ -17,7 +17,7 @@ ShooterSubsystem27375 {
 
     private final ArrayList<ShooterState> shooterStateList;
 
-    public ShooterSubsystem27375(DcMotor shooterMotor, Servo servo, double power, Telemetry telemetry){
+    public ShooterSubsystem27375(DcMotor shooterMotor, double power, Telemetry telemetry){
         shooterStateList = new ArrayList<>();
         shooterStateList.add(ShooterState.STOPPED);
 
