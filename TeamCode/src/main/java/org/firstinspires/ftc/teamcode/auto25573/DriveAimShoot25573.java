@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto25573;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.constants.Constants25573;
 import org.firstinspires.ftc.teamcode.constants.Constants27375;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
 
@@ -41,9 +42,9 @@ public class DriveAimShoot25573 {
         while (opMode.opModeIsActive() && aimTimer.seconds() < aimSeconds) {
             robot.driveSubsystem.goToTargetPose(
                     robot.aprilTagVision.getFtcPose(),
-                    Constants27375.SHOOTING_POSE,
-                    Constants27375.TRANSLATE_GAIN,
-                    Constants27375.YAW_GAIN
+                    Constants25573.SHOOTING_POSE,
+                    Constants25573.TRANSLATE_GAIN,
+                    Constants25573.YAW_GAIN
             );
             robot.driveSubsystem.drive();
             opMode.telemetry.addData("AimTimer:", aimTimer.seconds());
