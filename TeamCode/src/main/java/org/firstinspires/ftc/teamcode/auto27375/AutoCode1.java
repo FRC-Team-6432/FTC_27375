@@ -5,15 +5,15 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer27375;
 
-@Autonomous
+@Autonomous(group = "27375")
 public class AutoCode1 extends LinearOpMode {
-    private DriveAimShoot driveAimShoot;
+    private DriveAimShoot27375 driveAimShoot27375;
     private RobotContainer27375 robot;
 
     @Override
     public void runOpMode() throws InterruptedException {
         this.robot =  new RobotContainer27375(hardwareMap, telemetry);
-        driveAimShoot = new DriveAimShoot(
+        driveAimShoot27375 = new DriveAimShoot27375(
                 this, robot,
                 0.5, 0, 0,
                 3, 3
@@ -23,7 +23,7 @@ public class AutoCode1 extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
-                driveAimShoot.run();
+                driveAimShoot27375.run();
             }
         }
     }

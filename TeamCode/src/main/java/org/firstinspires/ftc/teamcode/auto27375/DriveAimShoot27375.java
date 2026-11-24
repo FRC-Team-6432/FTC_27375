@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer27375;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class DriveAimShoot {
+public class DriveAimShoot27375 {
     private final RobotContainer27375 robot;
     private final LinearOpMode opMode;
     private final double forward;
@@ -16,7 +16,7 @@ public class DriveAimShoot {
     private final double strafe;
     private final double aimSeconds;
     private final double shootSeconds;
-    public DriveAimShoot(LinearOpMode opMode, RobotContainer27375 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds) {
+    public DriveAimShoot27375(LinearOpMode opMode, RobotContainer27375 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds) {
         this.opMode = opMode;
         this.robot = robot;
         this.forward = forward;

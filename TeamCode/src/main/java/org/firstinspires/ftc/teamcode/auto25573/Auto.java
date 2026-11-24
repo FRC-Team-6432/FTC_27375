@@ -3,13 +3,14 @@ package org.firstinspires.ftc.teamcode.auto25573;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.auto27375.DriveAimShoot25573;
+import org.firstinspires.ftc.teamcode.auto27375.DriveAimShoot27375;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
-import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
-@Autonomous
+@Autonomous(group = "25573")
 public class Auto extends LinearOpMode {
-    //TODO: define motors, sensors, processors here
-    RobotContainer25573 robot;
+    private DriveAimShoot25573 driveAimShoot25573;
+    private RobotContainer25573 robot;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -20,31 +21,20 @@ public class Auto extends LinearOpMode {
 
         if (opModeIsActive()) {
             while(opModeIsActive()) {
-                //TODO: add loop code here
-                robot.drivebase.setDriveParameters(1, 0.5, 0);
-                while(robot.aprilTagVision.getFtcPose() == null) {
-                    robot.drivebase.drive();
-                }
-
-                robot.drivebase.goToTargetPose(
-                        robot.aprilTagVision.getFtcPose(),
-                        new AprilTagPoseFtc(
-                                0,
-                                -1000,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0
-                        ),
-                        0.001,
-                        0.001
+                this.robot =  new RobotContainer25573(hardwareMap, telemetry);
+                driveAimShoot25573 = new DriveAimShoot25573(
+                        this, robot,
+                        0, 0, 1,
+                        3, 3
                 );
 
-                telemetry.addData("Runtime: ", getRuntime());
-                telemetry.update();
+                waitForStart();
+
+                if (opModeIsActive()) {
+                    while (opModeIsActive()) {
+                        driveAimShoot25573.run();
+                    }
+                }
             }
         }
     }

@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.vision.AprilTagVision;
 
 public class RobotContainer25573 {
-    public final DriveSubsystem drivebase;
+    public final DriveSubsystem driveSubsystem;
     public final ShooterSubsystem pollenShooter;
     public final ShooterSubsystem nectarShooter;
     public final IntakeSubsystem intake;
@@ -34,7 +34,7 @@ public class RobotContainer25573 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        this.drivebase = new DriveSubsystem(
+        this.driveSubsystem = new DriveSubsystem(
                 frontLeft,
                 frontRight,
                 backLeft,
