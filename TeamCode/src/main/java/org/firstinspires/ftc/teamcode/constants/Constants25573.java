@@ -25,5 +25,5 @@ public class Constants25573 {
             0, 0, 0
     );
     public static final double TRANSLATE_GAIN = 0.003;
-    public static final double YAW_GAIN = 0.05;
+    public static final double YAW_GAIN = 0.02;
 }
