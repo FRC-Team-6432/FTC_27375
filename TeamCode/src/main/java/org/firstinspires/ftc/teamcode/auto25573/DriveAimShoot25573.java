@@ -1,11 +1,10 @@
-package org.firstinspires.ftc.teamcode.auto27375;
+package org.firstinspires.ftc.teamcode.auto25573;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.constants.Constants27375;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
-import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer27375;
 
 public class DriveAimShoot25573 {
     private final RobotContainer25573 robot;

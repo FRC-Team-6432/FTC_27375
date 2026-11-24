@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.auto25573;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.auto27375.DriveAimShoot25573;
-import org.firstinspires.ftc.teamcode.auto27375.DriveAimShoot27375;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
 
 @Autonomous(group = "25573")
