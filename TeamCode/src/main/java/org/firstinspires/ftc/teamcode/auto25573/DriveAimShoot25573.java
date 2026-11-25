@@ -15,7 +15,8 @@ public class DriveAimShoot25573 {
     private final double strafe;
     private final double aimSeconds;
     private final double shootSeconds;
-    public DriveAimShoot25573(LinearOpMode opMode, RobotContainer25573 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds) {
+    private final double spinupSeconds;
+    public DriveAimShoot25573(LinearOpMode opMode, RobotContainer25573 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds, double spinupSeconds) {
         this.opMode = opMode;
         this.robot = robot;
         this.forward = forward;
@@ -23,6 +24,7 @@ public class DriveAimShoot25573 {
         this.strafe = strafe;
         this.aimSeconds = aimSeconds;
         this.shootSeconds = shootSeconds;
+        this.spinupSeconds = spinupSeconds;
     }
 
     public void run() throws InterruptedException {
@@ -37,7 +39,7 @@ public class DriveAimShoot25573 {
         robot.driveSubsystem.setDriveParameters(0, 0, 0);
         robot.driveSubsystem.drive();
 
-        // Aim at the tag for 3 seconds
+        // Aim at the tag
         ElapsedTime aimTimer = new ElapsedTime();
         while (opMode.opModeIsActive() && aimTimer.seconds() < aimSeconds) {
             robot.driveSubsystem.goToTargetPose(
@@ -55,15 +57,27 @@ public class DriveAimShoot25573 {
         robot.driveSubsystem.setDriveParameters(0, 0, 0);
         robot.driveSubsystem.drive();
 
-        // Shoot for 3 seconds
-        ElapsedTime shootTimer = new ElapsedTime();
+        // Spinup
+        ElapsedTime spinupTimer = new ElapsedTime();
         robot.pollenShooter.handle(true, false, false);
-        while (opMode.opModeIsActive() && shootTimer.seconds() < shootSeconds) {
+        while (opMode.opModeIsActive() && spinupTimer.seconds() < spinupSeconds) {
             opMode.sleep(20);
-            opMode.telemetry.addData("ShootTimer:", shootTimer.seconds());
+            opMode.telemetry.addData("SpinUpTimer:", spinupTimer.seconds());
             opMode.telemetry.update();
         }
+
+        // Shoot
+        ElapsedTime shooterTimer = new ElapsedTime();
+        robot.pollenShooter.handle(true, false, true);
+        while (opMode.opModeIsActive() && shooterTimer.seconds() < shootSeconds) {
+            opMode.sleep(20);
+            opMode.telemetry.addData("ShootTimer:", shooterTimer.seconds());
+            opMode.telemetry.update();
+        }
+
         robot.pollenShooter.handle(false, false, false);
+        opMode.telemetry.addLine("Auto Complete!!!!!!!!!!!!");
+        opMode.telemetry.update();
     }
 
 }

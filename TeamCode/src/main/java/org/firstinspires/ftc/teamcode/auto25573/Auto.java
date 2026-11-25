@@ -12,27 +12,19 @@ public class Auto extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        // TODO: add initialise code here
+        this.robot =  new RobotContainer25573(hardwareMap, telemetry);
+        driveAimShoot25573 = new DriveAimShoot25573(
+                this, robot,
+                0, 0, -0.5,
+                10, 10, 5
+        );
 
         waitForStart();
         resetRuntime();
 
         if (opModeIsActive()) {
             while(opModeIsActive()) {
-                this.robot =  new RobotContainer25573(hardwareMap, telemetry);
-                driveAimShoot25573 = new DriveAimShoot25573(
-                        this, robot,
-                        0, 0, -0.5,
-                        10, 10
-                );
-
-                waitForStart();
-
-                if (opModeIsActive()) {
-                    while (opModeIsActive()) {
-                        driveAimShoot25573.run();
-                    }
-                }
+                driveAimShoot25573.run();
             }
         }
     }
