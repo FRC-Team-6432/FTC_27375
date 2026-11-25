@@ -7,7 +7,7 @@ import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
 import org.firstinspires.ftc.teamcode.constants.Constants25573;
 
 
-@TeleOp
+@TeleOp(group = "25573")
 public class TeleOpMain25573 extends LinearOpMode {
     private RobotContainer25573 robot;
 

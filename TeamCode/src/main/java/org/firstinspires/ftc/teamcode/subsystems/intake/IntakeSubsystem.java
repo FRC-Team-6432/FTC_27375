@@ -59,7 +59,3 @@ public class IntakeSubsystem {
             telemetry.addData("Intake State: ", this.getIntakeState());
         }
     }
-//        public void telemetry() {
-//    telemetry.addData("Shooter State: ", this.getIntakeState());
-//    telemetry.addData("Power", this.power);
-//}
