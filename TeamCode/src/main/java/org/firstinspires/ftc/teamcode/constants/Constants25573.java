@@ -26,4 +26,22 @@ public class Constants25573 {
     );
     public static final double TRANSLATE_GAIN = 0.003;
     public static final double YAW_GAIN = 0.02;
+
+    public class Auto {
+        public static final double FORWARD_B1 = 0;
+        public static final double FORWARD_B2 = 0;
+        public static final double FORWARD_B3 = 0;
+        public static final double FORWARD_B4 = 0;
+        public static final double FORWARD_B5 = 0;
+        public static final double STRAVE_B1 = 0;
+        public static final double STRAVE_B2 = 0;
+        public static final double STRAVE_B3 = 0;
+        public static final double STRAVE_B4 = 0;
+        public static final double STRAVE_B5 = 0;
+        public static final double ROTATE_B1 = 0;
+        public static final double ROTATE_B2 = 0;
+        public static final double ROTATE_B3 = 0;
+        public static final double ROTATE_B4 = 0;
+        public static final double ROTATE_B5 = 0;
+    }
 }
