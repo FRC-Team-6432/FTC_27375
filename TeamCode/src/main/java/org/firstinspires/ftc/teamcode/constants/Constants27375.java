@@ -20,6 +20,21 @@ public class Constants27375 {
         public static final double YAW_GAIN = 0.02;
 
         public class Auto {
+                public static final double FORWARD_B1 = 0;
+                public static final double FORWARD_B2 = 0;
+                public static final double FORWARD_B3 = 0;
+                public static final double FORWARD_B4 = 0;
+                public static final double FORWARD_B5 = 0;
+                public static final double STRAFE_B1 = 0;
+                public static final double STRAFE_B2 = 0;
+                public static final double STRAFE_B3 = 0;
+                public static final double STRAFE_B4 = 0;
+                public static final double STRAFE_B5 = 0;
+                public static final double ROTATE_B1 = 0;
+                public static final double ROTATE_B2 = 0;
+                public static final double ROTATE_B3 = 0;
+                public static final double ROTATE_B4 = 0;
+                public static final double ROTATE_B5 = 0;
                 public static final double FORWARD_R1 = 0;
                 public static final double ROTATE_R1 = 0;
                 public static final double STRAFE_R1 = 0;

@@ -3,9 +3,10 @@ package org.firstinspires.ftc.teamcode.subsystems.drive;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.constants.Constants25573;
 import org.firstinspires.ftc.vision.apriltag.AprilTagPoseFtc;
 
-public class DriveSubsystem {
+public class DriveSubsystem25573 {
     private final DcMotor frontLeft;
     private final DcMotor frontRight;
     private final DcMotor backLeft;
@@ -15,7 +16,7 @@ public class DriveSubsystem {
     private double rotate;
     private double strafe;
 
-    public DriveSubsystem(DcMotor frontLeft, DcMotor frontRight, DcMotor backLeft, DcMotor backRight, Telemetry telemetry) {
+    public DriveSubsystem25573(DcMotor frontLeft, DcMotor frontRight, DcMotor backLeft, DcMotor backRight, Telemetry telemetry) {
 
         this.frontLeft = frontLeft;
         this.frontRight = frontRight;
@@ -37,10 +38,10 @@ public class DriveSubsystem {
     }
 
     public void drive() {
-        frontLeft.setPower(forward+rotate+strafe);
-        frontRight.setPower(forward-rotate-strafe);
-        backLeft.setPower(forward+rotate-strafe);
-        backRight.setPower(forward-rotate+strafe);
+        frontLeft.setPower((forward+rotate+strafe) * Constants25573.DRIVE_GAIN);
+        frontRight.setPower((forward-rotate-strafe) * Constants25573.DRIVE_GAIN);
+        backLeft.setPower((forward+rotate-strafe) * Constants25573.DRIVE_GAIN);
+        backRight.setPower((forward-rotate+strafe) * Constants25573.DRIVE_GAIN);
     }
 
     public void goToTargetPose(AprilTagPoseFtc currentPose, AprilTagPoseFtc targetPose, double translateGain, double yawGain) {

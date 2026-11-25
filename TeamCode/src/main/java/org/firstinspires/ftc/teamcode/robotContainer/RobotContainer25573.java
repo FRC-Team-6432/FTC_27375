@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.constants.Constants25573;
-import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem25573;
 import org.firstinspires.ftc.teamcode.subsystems.intake.IntakeSubsystem;
 import org.firstinspires.ftc.teamcode.subsystems.shooter.ShooterSubsystem;
 import org.firstinspires.ftc.teamcode.vision.AprilTagVision;
 
 public class RobotContainer25573 {
-    public final DriveSubsystem driveSubsystem;
+    public final DriveSubsystem25573 driveSubsystem;
     public final ShooterSubsystem pollenShooter;
     public final ShooterSubsystem nectarShooter;
     public final IntakeSubsystem intake;
@@ -34,7 +34,7 @@ public class RobotContainer25573 {
         backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        this.driveSubsystem = new DriveSubsystem(
+        this.driveSubsystem = new DriveSubsystem25573(
                 frontLeft,
                 frontRight,
                 backLeft,
@@ -63,7 +63,7 @@ public class RobotContainer25573 {
         );
 
         this.intake = new IntakeSubsystem(hardwareMap.tryGet(DcMotor.class,
-                Constants25573.INTAKE_MOTOR), telemetry);
+                Constants25573.INTAKE_MOTOR), telemetry,Constants25573.INTAKE_SPEED);
 
         this.aprilTagVision = new AprilTagVision(
                 hardwareMap.get(WebcamName.class, Constants25573.WEBCAM),
