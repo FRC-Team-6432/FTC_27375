@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.constants.Constants27375;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer27375;
 
 
-@TeleOp
+@TeleOp(group = "27375")
 public class TeleOpMain27375 extends LinearOpMode {
     public RobotContainer27375 robot;
 
@@ -38,6 +38,7 @@ public class TeleOpMain27375 extends LinearOpMode {
                 robot.intakeSubsystem.handle(gamepad1.right_bumper, gamepad1.right_trigger_pressed);
 
                 telemetry.addData("Runtime: ", getRuntime());
+                robot.aprilTagVision.telemetry();
                 robot.driveSubsystem.telemetry();
                 robot.intakeSubsystem.telemetry();
                 robot.shooterSubsystem.telemetry();
