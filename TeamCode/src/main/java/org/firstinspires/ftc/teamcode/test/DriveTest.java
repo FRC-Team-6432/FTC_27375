@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.subsystems.drive.DriveSubsystem25573;
 
 @TeleOp
 @Disabled
@@ -16,7 +16,7 @@ public class DriveTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
         // TODO: add initialise code here
-        DriveSubsystem driveSubsystem = new DriveSubsystem(
+        DriveSubsystem25573 driveSubsystem = new DriveSubsystem25573(
                 hardwareMap.get(DcMotor.class, "front left"),
                 hardwareMap.get(DcMotor.class, "front right"),
                 hardwareMap.get(DcMotor.class, "back left"),

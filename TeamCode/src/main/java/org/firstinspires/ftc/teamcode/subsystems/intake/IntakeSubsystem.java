@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems.intake;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -9,16 +8,21 @@ import java.util.ArrayList;
 
 public class IntakeSubsystem {
         private final Telemetry telemetry;
-        private final double INTAKE_SPEED = 1;
+        private double intakeSpeed;
         private final DcMotor intakeMotor;
         private final ArrayList<IntakeState> intakeStateList;
 
-        public IntakeSubsystem(DcMotor intakeMotor, Telemetry telemetry){
+        public IntakeSubsystem(DcMotor intakeMotor, Telemetry telemetry, double intakeSpeed){
             intakeStateList = new ArrayList<>();
             intakeStateList.add(IntakeState.STOPPED);
 
             this.intakeMotor = intakeMotor;
             this.telemetry = telemetry;
+            this.intakeSpeed = intakeSpeed;
+        }
+
+        public IntakeSubsystem(DcMotor intakeMotor, Telemetry telemetry) {
+            this(intakeMotor, telemetry, 1);
         }
 
         public void handle(boolean shouldIntake, boolean shouldOuttake) {
@@ -35,10 +39,10 @@ public class IntakeSubsystem {
 
             switch (getIntakeState()) {
                 case INTAKING:
-                    intakeMotor.setPower(INTAKE_SPEED);
+                    intakeMotor.setPower(intakeSpeed);
                     break;
                 case OUTTAKING:
-                    intakeMotor.setPower(-INTAKE_SPEED);
+                    intakeMotor.setPower(-intakeSpeed);
                     break;
                 case STOPPED:
                     intakeMotor.setPower(0);
