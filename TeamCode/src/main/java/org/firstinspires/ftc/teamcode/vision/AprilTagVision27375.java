@@ -42,7 +42,7 @@ public class AprilTagVision27375 {
         this.visionPortal = new VisionPortal.Builder()
                 .setCamera(webcam)
                 .setStreamFormat(VisionPortal.StreamFormat.MJPEG)
-                .setCameraResolution(new Size(1280, 720))
+                .setCameraResolution(new Size(640, 480))
                 .enableLiveView(true)
                 .addProcessor(this.aprilTagProcessor)
                 .build();
