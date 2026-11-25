@@ -18,4 +18,22 @@ public class Constants27375 {
         );
         public static final double TRANSLATE_GAIN = 0.003;
         public static final double YAW_GAIN = 0.02;
+
+        public class Auto {
+                public static final double FORWARD_R1 = 0;
+                public static final double ROTATE_R1 = 0;
+                public static final double STRAFE_R1 = 0;
+                public static final double FORWARD_R2 = 0;
+                public static final double ROTATE_R2 = 0;
+                public static final double STRAFE_R2 = 0;
+                public static final double FORWARD_R3 = 0;
+                public static final double ROTATE_R3 = 0;
+                public static final double STRAFE_R3 = 0;
+                public static final double FORWARD_R4 = 0;
+                public static final double ROTATE_R4 = 0;
+                public static final double STRAFE_R4 = 0;
+                public static final double FORWARD_R5 = 0;
+                public static final double ROTATE_R5 = 0;
+                public static final double STRAFE_R5 = 0;
+        }
 }
