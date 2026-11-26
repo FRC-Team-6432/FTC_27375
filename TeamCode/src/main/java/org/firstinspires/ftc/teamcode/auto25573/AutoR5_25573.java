@@ -3,10 +3,11 @@ package org.firstinspires.ftc.teamcode.auto25573;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.constants.Constants25573;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
 
 @Autonomous(group = "25573")
-public class Auto extends LinearOpMode {
+public class AutoR5_25573 extends LinearOpMode {
     private DriveAimShoot25573 driveAimShoot25573;
     private RobotContainer25573 robot;
 
@@ -15,7 +16,7 @@ public class Auto extends LinearOpMode {
         this.robot =  new RobotContainer25573(hardwareMap, telemetry);
         driveAimShoot25573 = new DriveAimShoot25573(
                 this, robot,
-                0, 0, -0.5,
+                Constants25573.Auto.FORWARD_R5, Constants25573.Auto.ROTATE_R5, Constants25573.Auto.STRAFE_R5,
                 10, 10, 5
         );
 
