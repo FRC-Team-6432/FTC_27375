@@ -21,6 +21,7 @@ public class TeleOpMain27375 extends LinearOpMode {
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
+                robot.aprilTagVision.getFtcPose();
                 if (gamepad1.x) {
                     robot.driveSubsystem.goToTargetPose(
                             robot.aprilTagVision.getFtcPose(),

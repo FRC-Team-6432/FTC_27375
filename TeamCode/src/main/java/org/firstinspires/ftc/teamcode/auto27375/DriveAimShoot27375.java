@@ -12,11 +12,15 @@ public class DriveAimShoot27375 {
     private final RobotContainer27375 robot;
     private final LinearOpMode opMode;
     private final double forward;
+    private final double parkForward;
+    private final double parkRotate;
+    private final double parkStrafe;
+    private final double parkSeconds;
     private final double rotate;
     private final double strafe;
     private final double aimSeconds;
     private final double shootSeconds;
-    public DriveAimShoot27375(LinearOpMode opMode, RobotContainer27375 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds) {
+    public DriveAimShoot27375(LinearOpMode opMode, RobotContainer27375 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds, double parkForward, double parkRotate, double parkStrafe, double parkSeconds) {
         this.opMode = opMode;
         this.robot = robot;
         this.forward = forward;
@@ -24,6 +28,10 @@ public class DriveAimShoot27375 {
         this.strafe = strafe;
         this.aimSeconds = aimSeconds;
         this.shootSeconds = shootSeconds;
+        this.parkForward = parkForward;
+        this.parkRotate = parkRotate;
+        this.parkStrafe = parkStrafe;
+        this.parkSeconds= parkSeconds;
     }
 
     public void run() throws InterruptedException {
@@ -61,6 +69,12 @@ public class DriveAimShoot27375 {
             opMode.sleep(20);
         }
         robot.shooterSubsystem.handle(false, false);
+
+        ElapsedTime parkTimer = new ElapsedTime();
+        robot.driveSubsystem.setDriveParameters(forward,rotate,strafe);
+        while (opMode.opModeIsActive() && parkTimer.seconds() < parkSeconds) {
+            robot.driveSubsystem.drive();
+        }
     }
 
 }
