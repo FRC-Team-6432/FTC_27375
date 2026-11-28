@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer27375;
 
 @Autonomous(group = "27375")
-public class AutoCode1 extends LinearOpMode {
+public class FowardAuto27375 extends LinearOpMode {
     private DriveAimShoot27375 driveAimShoot27375;
     private RobotContainer27375 robot;
 
