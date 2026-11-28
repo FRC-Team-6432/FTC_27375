@@ -13,10 +13,15 @@ public class DriveAimShoot25573 {
     private final double forward;
     private final double rotate;
     private final double strafe;
+    private final double parkForward;
+    private final double parkRotate;
+    private final double parkStrafe;
     private final double aimSeconds;
     private final double shootSeconds;
     private final double spinupSeconds;
-    public DriveAimShoot25573(LinearOpMode opMode, RobotContainer25573 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds, double spinupSeconds) {
+    private final double parkSeconds;
+
+    public DriveAimShoot25573(LinearOpMode opMode, RobotContainer25573 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds, double spinupSeconds, double parkForward, double parkRotate, double parkStrafe, double parkSeconds) {
         this.opMode = opMode;
         this.robot = robot;
         this.forward = forward;
@@ -25,6 +30,10 @@ public class DriveAimShoot25573 {
         this.aimSeconds = aimSeconds;
         this.shootSeconds = shootSeconds;
         this.spinupSeconds = spinupSeconds;
+        this.parkForward = parkForward;
+        this.parkRotate = parkRotate;
+        this.parkStrafe = parkStrafe;
+        this.parkSeconds= parkSeconds;
     }
 
     public void run() throws InterruptedException {
@@ -76,6 +85,13 @@ public class DriveAimShoot25573 {
         }
 
         robot.pollenShooter.handle(false, false, false);
+
+        ElapsedTime parkTimer = new ElapsedTime();
+        robot.driveSubsystem.setDriveParameters(forward,rotate,strafe);
+        while (opMode.opModeIsActive() && parkTimer.seconds() < parkSeconds) {
+            robot.driveSubsystem.drive();
+        }
+
         opMode.telemetry.addLine("Auto Complete!!!!!!!!!!!!");
         opMode.telemetry.update();
     }

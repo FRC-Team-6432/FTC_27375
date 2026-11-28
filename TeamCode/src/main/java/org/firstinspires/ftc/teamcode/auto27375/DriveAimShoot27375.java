@@ -12,14 +12,14 @@ public class DriveAimShoot27375 {
     private final RobotContainer27375 robot;
     private final LinearOpMode opMode;
     private final double forward;
+    private final double rotate;
+    private final double strafe;
     private final double parkForward;
     private final double parkRotate;
     private final double parkStrafe;
-    private final double parkSeconds;
-    private final double rotate;
-    private final double strafe;
     private final double aimSeconds;
     private final double shootSeconds;
+    private final double parkSeconds;
     public DriveAimShoot27375(LinearOpMode opMode, RobotContainer27375 robot, double forward, double rotate, double strafe, double aimSeconds, double shootSeconds, double parkForward, double parkRotate, double parkStrafe, double parkSeconds) {
         this.opMode = opMode;
         this.robot = robot;
