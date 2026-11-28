@@ -17,7 +17,7 @@ public class AutoB1_25573 extends LinearOpMode {
         driveAimShoot25573 = new DriveAimShoot25573(
                 this, robot,
                 Constants25573.Auto.FORWARD_B1, Constants25573.Auto.ROTATE_B1, Constants25573.Auto.STRAFE_B1,
-                5, 7, 5, -0.5, 0, -0.5, 5
+                5, 7, 5, -0.6, 0, 0.4, 5
         );
 
         waitForStart();
