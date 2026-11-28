@@ -7,17 +7,15 @@ import org.firstinspires.ftc.teamcode.constants.Constants25573;
 import org.firstinspires.ftc.teamcode.robotContainer.RobotContainer25573;
 
 @Autonomous(group = "25573")
-public class AutoB1_25573 extends LinearOpMode {
-    private DriveAimShoot25573 driveAimShoot25573;
+public class Park_Auto_25573 extends LinearOpMode {
+    private Park25573 park25573;
     private RobotContainer25573 robot;
 
     @Override
     public void runOpMode() throws InterruptedException {
         this.robot =  new RobotContainer25573(hardwareMap, telemetry);
-        driveAimShoot25573 = new DriveAimShoot25573(
-                this, robot,
-                Constants25573.Auto.FORWARD_B1, Constants25573.Auto.ROTATE_B1, Constants25573.Auto.STRAFE_B1,
-                5, 7, 5, -0.6, 0, 0.4, 5
+        this.park25573= new Park25573(
+                this, robot, -0.5, 0,-0.5, 4
         );
 
         waitForStart();
@@ -25,7 +23,7 @@ public class AutoB1_25573 extends LinearOpMode {
 
         if (opModeIsActive()) {
             while(opModeIsActive()) {
-                driveAimShoot25573.run();
+                park25573.run();
             }
         }
     }
